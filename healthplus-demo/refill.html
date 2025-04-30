@@ -1,0 +1,59 @@
+// This is not a complete file but the changes you need to make to the existing refill.html
+
+// 1. Add the auth.js script in the head section of refill.html:
+<script src="js/auth.js"></script>
+
+// 2. Replace the existing tab-pane with id="account-refill" with this updated version:
+<div class="tab-pane" id="account-refill">
+    <div id="not-logged-in" class="login-reminder">
+        <p>Please <a href="login.html">sign in</a> to view and refill prescriptions from your account.</p>
+        <p>When signed in, you'll see all your active prescriptions and can select which ones to refill.</p>
+    </div>
+    
+    <div id="user-prescriptions" class="prescriptions-list" style="display: none;">
+        <!-- User prescriptions will be dynamically loaded here -->
+    </div>
+</div>
+
+// 3. Add this script at the end of the file (before the closing </body> tag):
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if user is logged in
+        if (isLoggedIn()) {
+            // If on the account refill tab, load user prescriptions
+            const accountRefillTab = document.getElementById('account-refill');
+            if (accountRefillTab) {
+                document.getElementById('not-logged-in').style.display = 'none';
+                document.getElementById('user-prescriptions').style.display = 'block';
+                
+                // Load user prescriptions
+                loadUserPrescriptions();
+            }
+        }
+    });
+    
+    function loadUserPrescriptions() {
+        const prescriptionsList = document.getElementById('user-prescriptions');
+        const prescriptions = getUserPrescriptions();
+        
+        if (prescriptions.length === 0) {
+            prescriptionsList.innerHTML = '<p>You have no active prescriptions.</p>';
+            return;
+        }
+        
+        // Clear existing content
+        prescriptionsList.innerHTML = '<h3>Your Active Prescriptions</h3>';
+        
+        // Add each prescription
+        prescriptions.forEach(prescription => {
+            const prescriptionCard = document.createElement('div');
+            prescriptionCard.className = 'prescription-card';
+            prescriptionCard.innerHTML = `
+                <div class="prescription-info">
+                    <h4>${prescription.name}</h4>
+                    <p><strong>Rx #:</strong> ${prescription.rxNumber}</p>
+                    <p><strong>Doctor:</strong> ${prescription.doctor}</p>
+                    <p><strong>Last Filled:</strong> ${prescription.lastFilled}</p>
+                    <p><strong>Refills Remaining:</strong> ${prescription.refillsRemaining}</p>
+                    <p><strong>Price:</strong> $${prescription.price.toFixed(2)} (with insurance)</p>
+                    <p><strong>Instructions:</strong> ${prescription.instructions}</p>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Individual Health Plans - HealthPlus Insurance</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>HealthPlus</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="plans.html">Plans</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="refill.html">Refill Prescription</a></li>
+                </ul>
+            </nav>
+            <div class="buttons">
+                <a href="login.html" class="btn btn-outline">Sign In</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Plan Hero -->
+    <section class="plan-hero">
+        <div class="container">
+            <div class="plan-hero-content">
+                <h1>Essential Care</h1>
+                <h2>Individual Health Insurance Plan</h2>
+                <p>Affordable coverage for individuals seeking essential health benefits</p>
+                <div class="price-tag">Starting at <span>$199</span>/month</div>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">Enroll Now</a>
+                    <a href="#plan-details" class="btn btn-secondary">Plan Details</a>
+                </div>
+            </div>
+            <div class="plan-hero-image">
+                <div class="image-placeholder"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan Summary -->
+    <section class="plan-summary">
+        <div class="container">
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>$2,000</h3>
+                    <p>Annual Deductible</p>
+                </div>
+                <div class="summary-card">
+                    <div class="icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3>$30</h3>
+                    <p>Primary Care Copay</p>
+                </div>
+                <div class="summary-card">
+                    <div class="icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h3>Basic</h3>
+                    <p>Prescription Coverage</p>
+                </div>
+                <div class="summary-card">
+                    <div class="icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <h3>20%</h3>
+                    <p>Coinsurance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan Details -->
+    <section id="plan-details" class="plan-details">
+        <div class="container">
+            <h2>Plan Details</h2>
+            <div class="details-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="coverage">Coverage</button>
+                    <button class="tab-button" data-tab="costs">Costs</button>
+                    <button class="tab-button" data-tab="network">Provider Network</button>
+                    <button class="tab-button" data-tab="prescriptions">Prescriptions</button>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="coverage">
+                        <h3>What's Covered</h3>
+                        <ul class="coverage-list">
+                            <li><i class="fas fa-check"></i> Preventive care at no additional cost</li>
+                            <li><i class="fas fa-check"></i> Primary care physician visits</li>
+                            <li><i class="fas fa-check"></i> Specialist care (with referral)</li>
+                            <li><i class="fas fa-check"></i> Emergency and urgent care</li>
+                            <li><i class="fas fa-check"></i> Hospital services</li>
+                            <li><i class="fas fa-check"></i> Laboratory services</li>
+                            <li><i class="fas fa-check"></i> Maternity and newborn care</li>
+                            <li><i class="fas fa-check"></i> Basic prescription drug coverage</li>
+                        </ul>
+                        
+                        <h3>What's Not Covered</h3>
+                        <ul class="not-covered-list">
+                            <li><i class="fas fa-times"></i> Cosmetic procedures</li>
+                            <li><i class="fas fa-times"></i> Vision care</li>
+                            <li><i class="fas fa-times"></i> Dental services</li>
+                            <li><i class="fas fa-times"></i> Mental health services</li>
+                            <li><i class="fas fa-times"></i> Alternative therapies</li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="costs">
+                        <h3>Plan Costs</h3>
+                        <table class="costs-table">
+                            <tr>
+                                <th>Cost Type</th>
+                                <th>Amount</th>
+                                <th>Details</th>
+                            </tr>
+                            <tr>
+                                <td>Monthly Premium</td>
+                                <td>$199</td>
+                                <td>May vary based on age and location</td>
+                            </tr>
+                            <tr>
+                                <td>Annual Deductible</td>
+                                <td>$2,000</td>
+                                <td>Amount you pay before the plan begins to pay</td>
+                            </tr>
+                            <tr>
+                                <td>Out-of-Pocket Maximum</td>
+                                <td>$7,500</td>
+                                <td>Maximum you'll pay in a year for covered services</td>
+                            </tr>
+                            <tr>
+                                <td>Primary Care Visit</td>
+                                <td>$30 copay</td>
+                                <td>After deductible is met</td>
+                            </tr>
+                            <tr>
+                                <td>Specialist Visit</td>
+                                <td>$60 copay</td>
+                                <td>After deductible is met</td>
+                            </tr>
+                            <tr>
+                                <td>Emergency Room</td>
+                                <td>$350 copay</td>
+                                <td>Waived if admitted</td>
+                            </tr>
+                            <tr>
+                                <td>Urgent Care</td>
+                                <td>$75 copay</td>
+                                <td>After deductible is met</td>
+                            </tr>
+                            <tr>
+                                <td>Hospital Stay</td>
+                                <td>20% coinsurance</td>
+                                <td>After deductible is met</td>
+                            </tr>
+                            <tr>
+                                <td>Preventive Care</td>
+                                <td>$0</td>
+                                <td>No cost with in-network providers</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="network">
+                        <h3>Provider Network</h3>
+                        <p>The Essential Care plan uses our Standard Provider Network, giving you access to quality healthcare professionals and facilities across the region.</p>
+                        
+                        <div class="network-stats">
+                            <div class="stat">
+                                <div class="stat-number">2,500+</div>
+                                <div class="stat-label">Primary Care Physicians</div>
+                            </div>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>How do I know if this plan is right for me?</h3>
+                        <span class="accordion-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>The Essential Care plan is ideal for individuals who need basic coverage at an affordable price. It's best suited for those who are generally healthy, primarily need preventive care, and want protection against unexpected medical expenses. If you require regular specialist visits or have ongoing prescription needs, you might consider our Enhanced or Premier Care plans instead.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>Can I keep my current doctor?</h3>
+                        <span class="accordion-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>You can keep your current doctor if they are in our Standard Provider Network. Before enrolling, we recommend using our Provider Search tool to check if your preferred doctors and hospitals are in-network. If you see an out-of-network provider, you'll likely pay more for services.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>When will my coverage begin?</h3>
+                        <span class="accordion-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>If you enroll during the Open Enrollment Period, your coverage will typically begin on January 1st. If you enroll during a Special Enrollment Period due to a qualifying life event, your coverage will usually begin on the first day of the month following your enrollment.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>How do I refill prescriptions with this plan?</h3>
+                        <span class="accordion-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Prescription refills can be processed through any in-network pharmacy. You can also use our online prescription refill service or mail-order pharmacy for convenience and potential cost savings. Simply visit our <a href="refill.html">Prescription Refill</a> page to get started.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>Can I add optional dental or vision coverage?</h3>
+                        <span class="accordion-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Yes, we offer optional dental and vision coverage that can be added to your Essential Care plan for an additional monthly premium. These supplemental plans provide coverage for routine eye exams, glasses, contacts, dental cleanings, fillings, and more.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to get covered with Essential Care?</h2>
+                <p>Enroll today or contact us with any questions about this plan.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">Enroll Now</a>
+                    <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>HealthPlus</h3>
+                    <p>Your trusted partner for health insurance coverage. We're committed to providing affordable healthcare options for individuals and families.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Plans</h3>
+                    <ul>
+                        <li><a href="plan-individual.html">Individual Plans</a></li>
+                        <li><a href="plan-family.html">Family Plans</a></li>
+                        <li><a href="plan-senior.html">Senior Plans</a></li>
+                        <li><a href="plan-employer.html">Employer Plans</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Find a Doctor</a></li>
+                        <li><a href="refill.html">Refill Prescription</a></li>
+                        <li><a href="#">Health & Wellness</a></li>
+                        <li><a href="#">Member Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 1-800-555-HEALTH</li>
+                        <li><i class="fas fa-envelope"></i> support@healthplus.demo</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Insurance Way, Healthcare City, HC 12345</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 HealthPlus Insurance. All rights reserved. This is a demo website.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons and panes
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabPanes.forEach(pane => pane.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Add active class to corresponding pane
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Accordion functionality
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    // Toggle active class on parent
+                    this.parentElement.classList.toggle('active');
+                    
+                    // Toggle plus/minus icon
+                    const icon = this.querySelector('.accordion-icon i');
+                    if (icon.classList.contains('fa-plus')) {
+                        icon.classList.remove('fa-plus');
+                        icon.classList.add('fa-minus');
+                    } else {
+                        icon.classList.remove('fa-minus');
+                        icon.classList.add('fa-plus');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>    <div class="stat">
+                                <div class="stat-number">5,000+</div>
+                                <div class="stat-label">Specialists</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">200+</div>
+                                <div class="stat-label">Hospitals</div>
+                            </div>
+                        </div>
+                        
+                        <div class="network-search">
+                            <h4>Find a Provider</h4>
+                            <form action="#" method="post">
+                                <div class="form-group">
+                                    <label for="provider-type">Provider Type</label>
+                                    <select id="provider-type" name="provider-type">
+                                        <option value="all">All Providers</option>
+                                        <option value="primary">Primary Care</option>
+                                        <option value="specialist">Specialists</option>
+                                        <option value="hospital">Hospitals</option>
+                                        <option value="urgent">Urgent Care</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="provider-location">ZIP Code</label>
+                                    <input type="text" id="provider-location" name="provider-location" placeholder="Enter ZIP Code">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="prescriptions">
+                        <h3>Prescription Drug Coverage</h3>
+                        <p>The Essential Care plan includes basic prescription drug coverage with a tiered formulary system.</p>
+                        
+                        <table class="prescription-table">
+                            <tr>
+                                <th>Tier</th>
+                                <th>Description</th>
+                                <th>Copay/Coinsurance</th>
+                            </tr>
+                            <tr>
+                                <td>Tier 1</td>
+                                <td>Generic drugs</td>
+                                <td>$15 copay</td>
+                            </tr>
+                            <tr>
+                                <td>Tier 2</td>
+                                <td>Preferred brand drugs</td>
+                                <td>$45 copay</td>
+                            </tr>
+                            <tr>
+                                <td>Tier 3</td>
+                                <td>Non-preferred brand drugs</td>
+                                <td>$75 copay</td>
+                            </tr>
+                            <tr>
+                                <td>Tier 4</td>
+                                <td>Specialty drugs</td>
+                                <td>30% coinsurance</td>
+                            </tr>
+                        </table>
+                        
+                        <div class="prescription-info">
+                            <h4>Mail Order Savings</h4>
+                            <p>Save money by using our mail order pharmacy service. Get a 90-day supply for only 2.5 times your regular copay.</p>
+                            <a href="refill.html" class="btn btn-secondary">Refill Prescriptions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eligibility -->
+    <section class="eligibility">
+        <div class="container">
+            <h2>Plan Eligibility</h2>
+            <div class="eligibility-content">
+                <div class="eligibility-text">
+                    <h3>Who is eligible for the Essential Care plan?</h3>
+                    <p>This plan is ideal for individuals who:</p>
+                    <ul>
+                        <li>Are between the ages of 18-64</li>
+                        <li>Don't have access to employer-sponsored insurance</li>
+                        <li>Aren't eligible for Medicare or Medicaid</li>
+                        <li>Need affordable, basic coverage for essential health benefits</li>
+                        <li>Are generally healthy and primarily need preventive care</li>
+                    </ul>
+                    <p>Open enrollment typically runs from November to January, but you may qualify for a Special Enrollment Period if you've experienced certain life events like losing other coverage, moving, getting married, having a baby, or adopting a child.</p>
+                </div>
+                <div class="eligibility-cta">
+                    <div class="cta-box">
+                        <h3>Ready to Enroll?</h3>
+                        <p>Start your application today or speak with one of our representatives for assistance.</p>
+                        <div class="cta-buttons">
+                            <a href="#" class="btn btn-primary">Enroll Online</a>
+                            <a href="contact.html" class="btn btn-outline">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Plans -->
+    <section class="additional-plans">
+        <div class="container">
+            <h2>Other Individual Plans You May Like</h2>
+            <div class="plans-slider">
+                <div class="plan-slide">
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <h3>Basic Care</h3>
+                            <span class="price">$149<span>/month</span></span>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Preventive care</li>
+                                <li><i class="fas fa-check"></i> Primary care visits</li>
+                                <li><i class="fas fa-check"></i> Emergency services</li>
+                                <li><i class="fas fa-times"></i> Specialist visits</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                <div class="plan-slide">
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <h3>Enhanced Care</h3>
+                            <span class="price">$249<span>/month</span></span>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Preventive care</li>
+                                <li><i class="fas fa-check"></i> Primary care visits</li>
+                                <li><i class="fas fa-check"></i> Specialist visits</li>
+                                <li><i class="fas fa-check"></i> Enhanced prescription coverage</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                <div class="plan-slide">
+                    <div class="plan-card highlighted">
+                        <div class="plan-header">
+                            <h3>Premier Care</h3>
+                            <span class="price">$349<span>/month</span></span>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Comprehensive coverage</li>
+                                <li><i class="fas fa-check"></i> Lower deductible</li>
+                                <li><i class="fas fa-check"></i> Lower copays</li>
+                                <li><i class="fas fa-check"></i> Premium benefits</li>
+                            </ul>
+                        </div>

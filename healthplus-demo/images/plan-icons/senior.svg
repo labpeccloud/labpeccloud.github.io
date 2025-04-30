@@ -1,0 +1,27 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#f5f5f5"/>
+  
+  <!-- Senior Icon Group -->
+  <g transform="translate(60, 40)">
+    <!-- Head -->
+    <circle cx="40" cy="30" r="20" fill="#0072ce"/>
+    
+    <!-- Body with cane -->
+    <path d="M40,55 L40,100 M20,70 L60,70" 
+          stroke="#0072ce" stroke-width="8" stroke-linecap="round" fill="none"/>
+    
+    <!-- Cane -->
+    <path d="M65,40 L65,100 M55,40 C55,40 65,30 75,40" 
+          stroke="#007934" stroke-width="6" stroke-linecap="round" fill="none"/>
+    
+    <!-- Medicare Symbol -->
+    <circle cx="85" cy="85" r="15" fill="#ffffff" stroke="#0072ce" stroke-width="3"/>
+    <path d="M75,85 L95,85 M85,75 L85,95" 
+          stroke="#0072ce" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Bottom Label -->
+  <text x="100" y="180" font-family="Arial, sans-serif" font-weight="700" font-size="16" 
+        text-anchor="middle" fill="#333333">Senior Plan</text>
+</svg>

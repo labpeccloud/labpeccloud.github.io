@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Insurance Plans - HealthPlus Insurance</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>HealthPlus</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="plans.html">Plans</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="refill.html">Refill Prescription</a></li>
+                </ul>
+            </nav>
+            <div class="buttons">
+                <a href="login.html" class="btn btn-outline">Sign In</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <h1>Our Health Insurance Plans</h1>
+            <p>Find the perfect coverage for your needs and budget</p>
+        </div>
+    </section>
+
+    <!-- Plan Finder -->
+    <section class="plan-finder">
+        <div class="container">
+            <h2>Find Your Perfect Plan</h2>
+            <div class="finder-form">
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="plan-type">Plan Type</label>
+                        <select id="plan-type" name="plan-type">
+                            <option value="individual">Individual</option>
+                            <option value="family">Family</option>
+                            <option value="medicare">Medicare</option>
+                            <option value="employer">Employer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="zip-code">ZIP Code</label>
+                        <input type="text" id="zip-code" name="zip-code" placeholder="Enter ZIP">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search Plans</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan Categories -->
+    <section class="plan-categories">
+        <div class="container">
+            <h2>Browse Plans by Category</h2>
+            <div class="categories-grid">
+                <a href="plan-individual.html" class="category-card">
+                    <div class="icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Individual Plans</h3>
+                    <p>Coverage options for individuals seeking personal health insurance.</p>
+                </a>
+                <a href="plan-family.html" class="category-card">
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Family Plans</h3>
+                    <p>Comprehensive coverage for you and your family members.</p>
+                </a>
+                <a href="plan-senior.html" class="category-card">
+                    <div class="icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3>Senior Plans</h3>
+                    <p>Medicare supplement plans designed for seniors and retirees.</p>
+                </a>
+                <a href="plan-employer.html" class="category-card">
+                    <div class="icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Employer Plans</h3>
+                    <p>Group health insurance options for businesses and organizations.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Plans -->
+    <section class="featured-plans">
+        <div class="container">
+            <h2>Our Most Popular Plans</h2>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>Essential Care</h3>
+                        <span class="price">$199<span>/month</span></span>
+                    </div>
+                    <div class="plan-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Primary care visits</li>
+                            <li><i class="fas fa-check"></i> Preventive care covered</li>
+                            <li><i class="fas fa-check"></i> Emergency services</li>
+                            <li><i class="fas fa-check"></i> Basic prescription coverage</li>
+                        </ul>
+                    </div>
+                    <a href="plan-individual.html" class="btn btn-outline">View Details</a>
+                </div>
+                <div class="plan-card highlighted">
+                    <div class="plan-header">
+                        <h3>Complete Care</h3>
+                        <span class="price">$299<span>/month</span></span>
+                    </div>
+                    <div class="plan-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Primary & specialist visits</li>
+                            <li><i class="fas fa-check"></i> Enhanced preventive care</li>
+                            <li><i class="fas fa-check"></i> Full emergency coverage</li>
+                            <li><i class="fas fa-check"></i> Comprehensive prescription plan</li>
+                            <li><i class="fas fa-check"></i> Mental health services</li>
+                        </ul>
+                    </div>
+                    <a href="plan-family.html" class="btn btn-primary">View Details</a>
+                </div>
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>Senior Care Plus</h3>
+                        <span class="price">$149<span>/month</span></span>
+                    </div>
+                    <div class="plan-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Medicare supplement</li>
+                            <li><i class="fas fa-check"></i> Preventive care included</li>
+                            <li><i class="fas fa-check"></i> Prescription coverage</li>
+                            <li><i class="fas fa-check"></i> Vision & hearing benefits</li>
+                        </ul>
+                    </div>
+                    <a href="plan-senior.html" class="btn btn-outline">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan Comparison -->
+    <section class="plan-comparison">
+        <div class="container">
+            <h2>Compare Our Plans</h2>
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Features</th>
+                            <th>Essential Care</th>
+                            <th>Complete Care</th>
+                            <th>Senior Care Plus</th>
+                            <th>Business Pro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monthly Premium</td>
+                            <td>$199</td>
+                            <td>$299</td>
+                            <td>$149</td>
+                            <td>Varies</td>
+                        </tr>
+                        <tr>
+                            <td>Annual Deductible</td>
+                            <td>$2,000</td>
+                            <td>$1,000</td>
+                            <td>$500</td>
+                            <td>$1,500</td>
+                        </tr>
+                        <tr>
+                            <td>Primary Care Visit</td>
+                            <td>$30 copay</td>
+                            <td>$20 copay</td>
+                            <td>$15 copay</td>
+                            <td>$25 copay</td>
+                        </tr>
+                        <tr>
+                            <td>Specialist Visit</td>
+                            <td>$60 copay</td>
+                            <td>$40 copay</td>
+                            <td>$45 copay</td>
+                            <td>$50 copay</td>
+                        </tr>
+                        <tr>
+                            <td>Preventive Care</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Emergency Room</td>
+                            <td>$350 copay</td>
+                            <td>$250 copay</td>
+                            <td>$200 copay</td>
+                            <td>$300 copay</td>
+                        </tr>
+                        <tr>
+                            <td>Hospital Stay</td>
+                            <td>20% after deductible</td>
+                            <td>15% after deductible</td>
+                            <td>10% after deductible</td>
+                            <td>15% after deductible</td>
+                        </tr>
+                        <tr>
+                            <td>Prescription Coverage</td>
+                            <td>Basic</td>
+                            <td>Comprehensive</td>
+                            <td>Enhanced</td>
+                            <td>Standard</td>
+                        </tr>
+                        <tr>
+                            <td>Mental Health Services</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Vision Benefits</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td>Optional</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td>Optional</td>
+                        </tr>
+                        <tr>
+                            <td>Dental Coverage</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td>Optional</td>
+                            <td>Optional</td>
+                            <td>Optional</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><a href="plan-individual.html" class="btn btn-outline">View Plan</a></td>
+                            <td><a href="plan-family.html" class="btn btn-primary">View Plan</a></td>
+                            <td><a href="plan-senior.html" class="btn btn-outline">View Plan</a></td>
+                            <td><a href="plan-employer.html" class="btn btn-outline">View Plan</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Need help choosing a plan?</h2>
+                <p>Our experienced representatives are ready to assist you.</p>
+                <a href="contact.html" class="btn btn-primary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>HealthPlus</h3>
+                    <p>Your trusted partner for health insurance coverage. We're committed to providing affordable healthcare options for individuals and families.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Plans</h3>
+                    <ul>
+                        <li><a href="plan-individual.html">Individual Plans</a></li>
+                        <li><a href="plan-family.html">Family Plans</a></li>
+                        <li><a href="plan-senior.html">Senior Plans</a></li>
+                        <li><a href="plan-employer.html">Employer Plans</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Find a Doctor</a></li>
+                        <li><a href="refill.html">Refill Prescription</a></li>
+                        <li><a href="#">Health & Wellness</a></li>
+                        <li><a href="#">Member Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 1-800-555-HEALTH</li>
+                        <li><i class="fas fa-envelope"></i> support@healthplus.demo</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Insurance Way, Healthcare City, HC 12345</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 HealthPlus Insurance. All rights reserved. This is a demo website.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

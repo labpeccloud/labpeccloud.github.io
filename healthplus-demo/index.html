@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthPlus Insurance</title>
+    <link rel="stylesheet" href="/healthplus-demo/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>HealthPlus</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="plans.html">Plans</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="buttons">
+                <a href="login.html" class="btn btn-outline">Sign In</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Your Health, Your Way</h1>
+                <p>Find the perfect health insurance plan tailored to your needs.</p>
+                <div class="cta-buttons">
+                    <a href="plans.html" class="btn btn-primary">Explore Plans</a>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Placeholder for hero image -->
+                <div class="image-placeholder"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan Selection Tool -->
+    <section class="plan-finder">
+        <div class="container">
+            <h2>Find Your Perfect Plan</h2>
+            <div class="finder-form">
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="plan-type">Plan Type</label>
+                        <select id="plan-type" name="plan-type">
+                            <option value="individual">Individual</option>
+                            <option value="family">Family</option>
+                            <option value="medicare">Medicare</option>
+                            <option value="employer">Employer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="zip-code">ZIP Code</label>
+                        <input type="text" id="zip-code" name="zip-code" placeholder="Enter ZIP">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search Plans</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Plans -->
+    <section class="featured-plans">
+        <div class="container">
+            <h2>Popular Health Plans</h2>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>Essential Care</h3>
+                        <span class="price">$199<span>/month</span></span>
+                    </div>
+                    <div class="plan-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Primary care visits</li>
+                            <li><i class="fas fa-check"></i> Preventive care covered</li>
+                            <li><i class="fas fa-check"></i> Emergency services</li>
+                            <li><i class="fas fa-check"></i> Basic prescription coverage</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+                <div class="plan-card highlighted">
+                    <div class="plan-header">
+                        <h3>Complete Care</h3>
+                        <span class="price">$299<span>/month</span></span>
+                    </div>
+                    <div class="plan-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Primary & specialist visits</li>
+                            <li><i class="fas fa-check"></i> Enhanced preventive care</li>
+                            <li><i class="fas fa-check"></i> Full emergency coverage</li>
+                            <li><i class="fas fa-check"></i> Comprehensive prescription plan</li>
+                            <li><i class="fas fa-check"></i> Mental health services</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn btn-primary">View Details</a>
+                </div>
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>Senior Care Plus</h3>
+                        <span class="price">$149<span>/month</span></span>
+                    </div>
+                    <div class="plan-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Medicare supplement</li>
+                            <li><i class="fas fa-check"></i> Preventive care included</li>
+                            <li><i class="fas fa-check"></i> Prescription coverage</li>
+                            <li><i class="fas fa-check"></i> Vision & hearing benefits</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <h2>Why Choose HealthPlus?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Comprehensive Coverage</h3>
+                    <p>Our plans provide broad coverage to protect you and your family's health needs.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Affordable Options</h3>
+                    <p>Find plans that fit your budget without sacrificing quality of care.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <h3>Wide Provider Network</h3>
+                    <p>Access to thousands of doctors and hospitals across the country.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Digital Tools</h3>
+                    <p>Manage your health insurance from anywhere with our mobile app.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources">
+        <div class="container">
+            <h2>Health Resources</h2>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-image">
+                        <div class="image-placeholder"></div>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Understanding Your Benefits</h3>
+                        <p>Learn how to make the most of your health insurance coverage.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-image">
+                        <div class="image-placeholder"></div>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Wellness Tips</h3>
+                        <p>Simple ways to stay healthy and prevent illness year-round.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-image">
+                        <div class="image-placeholder"></div>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Finding a Doctor</h3>
+                        <p>Tips for selecting the right healthcare provider for your needs.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Need help choosing a plan?</h2>
+                <p>Our experienced representatives are ready to assist you.</p>
+                <a href="contact.html" class="btn btn-primary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>HealthPlus</h3>
+                    <p>Your trusted partner for health insurance coverage. We're committed to providing affordable healthcare options for individuals and families.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Plans</h3>
+                    <ul>
+                        <li><a href="#">Individual & Family</a></li>
+                        <li><a href="#">Medicare</a></li>
+                        <li><a href="#">Employer Groups</a></li>
+                        <li><a href="#">Dental & Vision</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Find a Doctor</a></li>
+                        <li><a href="#">Pharmacy Services</a></li>
+                        <li><a href="#">Health & Wellness</a></li>
+                        <li><a href="#">Member Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 1-800-555-HEALTH</li>
+                        <li><i class="fas fa-envelope"></i> support@healthplus.demo</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Insurance Way, Healthcare City, HC 12345</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 HealthPlus Insurance. All rights reserved. This is a demo website.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

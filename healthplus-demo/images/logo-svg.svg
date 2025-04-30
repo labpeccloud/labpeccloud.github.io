@@ -1,0 +1,16 @@
+<svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Rectangle -->
+  <rect width="300" height="80" fill="white" rx="5" ry="5"/>
+  
+  <!-- Main Logo Symbol - Cross/Plus -->
+  <g transform="translate(40, 15)">
+    <rect x="15" y="0" width="15" height="50" rx="4" fill="#0072ce"/>
+    <rect x="0" y="17.5" width="45" height="15" rx="4" fill="#0072ce"/>
+  </g>
+  
+  <!-- Text "HealthPlus" -->
+  <text x="105" y="48" font-family="Arial, sans-serif" font-weight="700" font-size="32" fill="#0072ce">HealthPlus</text>
+  
+  <!-- Heartbeat Line -->
+  <path d="M95,45 L103,45 L105,38 L109,52 L113,45 L120,45" stroke="#00a9e0" stroke-width="2" fill="none"/>
+</svg>

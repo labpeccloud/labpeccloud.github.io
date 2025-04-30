@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - HealthPlus Insurance</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/auth.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>HealthPlus</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="plans.html">Plans</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="refill.html">Refill Prescription</a></li>
+                </ul>
+            </nav>
+            <div class="buttons">
+                <!-- Auth buttons will be inserted here by auth.js -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <h1>My Dashboard</h1>
+                    <p>Welcome back, <span id="user-name">User</span>!</p>
+                </div>
+                
+                <div class="dashboard-content">
+                    <div class="dashboard-overview">
+                        <div class="overview-card">
+                            <div class="icon">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                            <h3>Member ID</h3>
+                            <p id="member-id">HP12345678</p>
+                        </div>
+                        <div class="overview-card">
+                            <div class="icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Current Plan</h3>
+                            <p id="current-plan">Complete Care Family Plan</p>
+                        </div>
+                        <div class="overview-card">
+                            <div class="icon">
+                                <i class="fas fa-pills"></i>
+                            </div>
+                            <h3>Active Prescriptions</h3>
+                            <p id="prescription-count">3</p>
+                        </div>
+                        <div class="overview-card">
+                            <div class="icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <h3>Next Payment</h3>
+                            <p>May 15, 2025</p>
+                        </div>
+                    </div>
+                    
+                    <h2 class="dashboard-section-title">Quick Actions</h2>
+                    <div class="quick-actions">
+                        <a href="refill.html" class="btn btn-primary">Refill Prescriptions</a>
+                        <a href="#" class="btn btn-outline">Find a Doctor</a>
+                        <a href="#" class="btn btn-outline">View ID Card</a>
+                        <a href="#" class="btn btn-outline">Pay Bill</a>
+                    </div>
+                    
+                    <h2 class="dashboard-section-title">My Prescriptions</h2>
+                    <div id="dashboard-prescriptions" class="prescriptions-list">
+                        <!-- Prescriptions will be loaded here -->
+                    </div>
+                    
+                    <h2 class="dashboard-section-title">Recent Claims</h2>
+                    <div class="recent-claims">
+                        <table class="claims-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Provider</th>
+                                    <th>Service</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>April 12, 2025</td>
+                                    <td>Dr. Sarah Johnson</td>
+                                    <td>Annual Physical</td>
+                                    <td><span class="status-paid">Paid</span></td>
+                                    <td>$0.00</td>
+                                </tr>
+                                <tr>
+                                    <td>March 28, 2025</td>
+                                    <td>City Urgent Care</td>
+                                    <td>Urgent Care Visit</td>
+                                    <td><span class="status-processing">Processing</span></td>
+                                    <td>$75.00</td>
+                                </tr>
+                                <tr>
+                                    <td>February 15, 2025</td>
+                                    <td>Metro Imaging</td>
+                                    <td>X-Ray</td>
+                                    <td><span class="status-paid">Paid</span></td>
+                                    <td>$45.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>HealthPlus</h3>
+                    <p>Your trusted partner for health insurance coverage. We're committed to providing affordable healthcare options for individuals and families.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Plans</h3>
+                    <ul>
+                        <li><a href="plan-pages/plan-individual.html">Individual Plans</a></li>
+                        <li><a href="plan-pages/plan-family.html">Family Plans</a></li>
+                        <li><a href="plan-pages/plan-senior.html">Senior Plans</a></li>
+                        <li><a href="plan-pages/plan-employer.html">Employer Plans</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Find a Doctor</a></li>
+                        <li><a href="refill.html">Refill Prescription</a></li>
+                        <li><a href="#">Health & Wellness</a></li>
+                        <li><a href="#">Member Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 1-800-555-HEALTH</li>
+                        <li><i class="fas fa-envelope"></i> support@healthplus.demo</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Insurance Way, Healthcare City, HC 12345</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 HealthPlus Insurance. All rights reserved. This is a demo website.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Check if user is logged in, redirect if not
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!requireLogin()) {
+                return; // requireLogin will handle the redirect
+            }
+            
+            // Load user data
+            const user = getCurrentUser();
+            
+            // Update user name
+            document.getElementById('user-name').textContent = `${user.firstName} ${user.lastName}`;
+            
+            // Update member ID
+            document.getElementById('member-id').textContent = user.memberId;
+            
+            // Update current plan
+            document.getElementById('current-plan').textContent = user.plan;
+            
+            // Update prescription count
+            document.getElementById('prescription-count').textContent = user.prescriptions.length;
+            
+            // Load prescriptions
+            loadUserPrescriptions();
+        });
+        
+        function loadUserPrescriptions() {
+            const prescriptionsList = document.getElementById('dashboard-prescriptions');
+            const prescriptions = getUserPrescriptions();
+            
+            if (prescriptions.length === 0) {
+                prescriptionsList.innerHTML = '<p>You have no active prescriptions.</p>';
+                return;
+            }
+            
+            // Clear existing content
+            prescriptionsList.innerHTML = '';
+            
+            // Add each prescription
+            prescriptions.forEach(prescription => {
+                const prescriptionCard = document.createElement('div');
+                prescriptionCard.className = 'prescription-card';
+                prescriptionCard.innerHTML = `
+                    <div class="prescription-info">
+                        <h4>${prescription.name}</h4>
+                        <p><strong>Rx #:</strong> ${prescription.rxNumber}</p>
+                        <p><strong>Doctor:</strong> ${prescription.doctor}</p>
+                        <p><strong>Last Filled:</strong> ${prescription.lastFilled}</p>
+                        <p><strong>Refills Remaining:</strong> ${prescription.refillsRemaining}</p>
+                        <p><strong>Instructions:</strong> ${prescription.instructions}</p>
+                    </div>
+                    <div class="prescription-actions">
+                        <a href="refill.html" class="btn btn-primary">Refill Now</a>
+                    </div>
+                `;
+                
+                prescriptionsList.appendChild(prescriptionCard);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Health Plans - HealthPlus Insurance</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>HealthPlus</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="plans.html">Plans</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="refill.html">Refill Prescription</a></li>
+                </ul>
+            </nav>
+            <div class="buttons">
+                <a href="login.html" class="btn btn-outline">Sign In</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Plan Hero -->
+    <section class="plan-hero">
+        <div class="container">
+            <div class="plan-hero-content">
+                <h1>Complete Care</h1>
+                <h2>Family Health Insurance Plan</h2>
+                <p>Comprehensive coverage for you and your entire family</p>
+                <div class="price-tag">Starting at <span>$299

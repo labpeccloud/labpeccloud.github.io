@@ -1,0 +1,38 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#f5f5f5"/>
+  
+  <!-- Prescription Bottle -->
+  <g transform="translate(50, 30)">
+    <!-- Bottle Body -->
+    <rect x="20" y="50" width="60" height="80" fill="#0072ce" rx="10" ry="10"/>
+    
+    <!-- Bottle Cap -->
+    <rect x="25" y="35" width="50" height="20" fill="#00a9e0" rx="5" ry="5"/>
+    <rect x="30" y="30" width="40" height="10" fill="#00a9e0" rx="3" ry="3"/>
+    
+    <!-- Label -->
+    <rect x="25" y="65" width="50" height="40" fill="white" rx="3" ry="3"/>
+    
+    <!-- Rx Symbol -->
+    <text x="38" y="95" font-family="Arial, sans-serif" font-weight="700" font-size="25" fill="#0072ce">Rx</text>
+    
+    <!-- Prescription Lines -->
+    <line x1="30" y1="75" x2="70" y2="75" stroke="#0072ce" stroke-width="2"/>
+    <line x1="30" y1="85" x2="70" y2="85" stroke="#0072ce" stroke-width="2"/>
+    <line x1="65" y1="95" x2="70" y2="95" stroke="#0072ce" stroke-width="2"/>
+    
+    <!-- Pills -->
+    <circle cx="30" cy="140" r="8" fill="#00a9e0"/>
+    <circle cx="50" cy="140" r="8" fill="#00a9e0"/>
+    <circle cx="70" cy="140" r="8" fill="#00a9e0"/>
+  </g>
+  
+  <!-- Refresh/Refill Arrow -->
+  <path d="M140,100 A40,40 0 1,0 100,140 L100,120 A20,20 0 1,1 120,100 Z" 
+        fill="#007934" transform="rotate(45, 100, 100)"/>
+  
+  <!-- Bottom Label -->
+  <text x="100" y="180" font-family="Arial, sans-serif" font-weight="700" font-size="16" 
+        text-anchor="middle" fill="#333333">Refill Prescription</text>
+</svg>
