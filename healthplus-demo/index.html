@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Updated Header with Horizontal Navigation -->
+<!-- Replace the current header with this updated version -->
 <header>
   <div class="container">
     <div class="logo">
@@ -17,8 +17,24 @@
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="plans.html">Plans</a></li>
-        <li><a href="resources.html">Resources</a></li>
+        <li class="dropdown">
+          <a href="plans.html" class="dropdown-toggle">Plans <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="plans-individual.html">Individual Plan</a></li>
+            <li><a href="plans-family.html">Family Plan</a></li>
+            <li><a href="plans-medicare.html">Medicare Plan</a></li>
+            <li><a href="plans-employer.html">Employer Plan</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="resources.html" class="dropdown-toggle">Resources <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="resources-benefits.html">Understanding Benefits</a></li>
+            <li><a href="resources-wellness.html">Wellness Tips</a></li>
+            <li><a href="resources-doctors.html">Find a Doctor</a></li>
+            <li><a href="resources-faq.html">FAQ</a></li>
+          </ul>
+        </li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
