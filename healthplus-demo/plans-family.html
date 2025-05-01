@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Plan - HealthPlus Insurance</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional styles for plan pages */
+        .plan-hero {
+            background-color: var(--bg-light);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .plan-hero h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .plan-hero p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+        
+        .plan-overview {
+            padding: 60px 0;
+            background-color: var(--bg-white);
+        }
+        
+        .plan-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .plan-detail-card {
+            flex: 1 0 300px;
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .plan-detail-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .plan-detail-card h3 i {
+            margin-right: 10px;
+        }
+        
+        .pricing-section {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .pricing-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .pricing-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            flex: 1 0 250px;
+            max-width: 350px;
+            box-shadow: var(--shadow-md);
+            color: var(--text-color);
+            text-align: left;
+        }
+        
+        .pricing-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 15px 0;
+            color: var(--secondary-color);
+        }
+        
+        .price span {
+            font-size: 1rem;
+            font-weight: normal;
+        }
+        
+        .coverage-section {
+            padding: 60px 0;
+        }
+        
+        .coverage-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        
+        .coverage-table th, .coverage-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--bg-medium);
+        }
+        
+        .coverage-table th {
+            background-color: var(--bg-light);
+            font-weight: 600;
+        }
+        
+        .coverage-table tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+        
+        .family-features {
+            padding: 60px 0;
+            background-color: var(--bg-light);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .faq-section {
+            background-color: var(--bg-light);
+            padding: 60px 0;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            background-color: var(--bg-white);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(52, 168, 83, 0.05);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 5px 20px 20px;
+            max-height: 500px;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .cta-section h2 {
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Dropdown Menus (Include your updated header here) -->
+    <header>
+        <div class="container">
+          <div class="logo">
+            <h1>HealthPlus</h1>
+          </div>
+          <nav>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li class="dropdown">
+                <a href="plans.html" class="dropdown-toggle">Plans <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                  <a href="plans-individual.html">Individual Plan</a>
+                  <a href="plans-family.html">Family Plan</a>
+                  <a href="plans-medicare.html">Medicare Plan</a>
+                  <a href="plans-employer.html">Employer Plan</a>
+                </div>
+              </li>
+              <li class="dropdown">
+                <a href="resources.html" class="dropdown-toggle">Resources <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                  <a href="resources-benefits.html">Understanding Benefits</a>
+                  <a href="resources-wellness.html">Wellness Tips</a>
+                  <a href="resources-doctors.html">Find a Doctor</a>
+                  <a href="resources-faq.html">FAQ</a>
+                </div>
+              </li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="buttons">
+            <a href="login.html" class="btn btn-outline">Sign In</a>
+            <a href="register.html" class="btn btn-primary">Register</a>
+          </div>
+        </div>
+    </header>
+    
+    <!-- Plan Hero Section -->
+    <section class="plan-hero">
+        <div class="container">
+            <h1>Family Health Plan</h1>
+            <p>Comprehensive healthcare coverage designed to protect every member of your family at an affordable price.</p>
+            <a href="#pricing" class="btn btn-primary">View Pricing</a>
+        </div>
+    </section>
+    
+    <!-- Plan Overview -->
+    <section class="plan-overview">
+        <div class="container">
+            <h2>Comprehensive Coverage for Your Entire Family</h2>
+            <p>Our Family Plan provides inclusive healthcare coverage for you, your spouse, and your children. With flexible options tailored to meet the unique needs of families, we ensure that everyone receives the care they need at a price you can afford.</p>
+            
+            <div class="plan-details">
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-user-friends"></i> Family-Centered Care</h3>
+                    <p>A network of family medicine practitioners and pediatricians who coordinate care for the whole family. Enjoy the convenience of scheduling multiple appointments on the same day.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-child"></i> Pediatric Services</h3>
+                    <p>Comprehensive pediatric coverage including well-child visits, immunizations, developmental screenings, vision, and dental care for children under 19 at no additional cost.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-stethoscope"></i> Preventive Care</h3>
+                    <p>100% coverage for preventive services including annual check-ups, age-appropriate screenings, immunizations, and wellness visits for all family members.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-pills"></i> Prescription Coverage</h3>
+                    <p>Comprehensive prescription drug coverage for the entire family with affordable copays for generic medications and reasonable costs for brand-name drugs.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-hospital"></i> Hospital Services</h3>
+                    <p>Coverage for inpatient and outpatient hospital services, emergency room visits, and surgical procedures with manageable deductibles for the whole family.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-heartbeat"></i> Maternity & Newborn Care</h3>
+                    <p>Complete maternity care including prenatal visits, labor and delivery, and postnatal care, plus comprehensive coverage for newborns from day one.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Family-Specific Features -->
+    <section class="family-features">
+        <div class="container">
+            <h2>Designed for Families Like Yours</h2>
+            <p>Our Family Plan includes special features that address the unique healthcare needs of families.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <h3>Family Deductible</h3>
+                    <p>Our family deductible system means you'll never pay more than the family maximum, regardless of which family members receive care.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tooth"></i>
+                    </div>
+                    <h3>Dental & Vision</h3>
+                    <p>Optional dental and vision coverage for the whole family at discounted rates, including orthodontic services for children.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Family Health Coach</h3>
+                    <p>Access to a dedicated health coach who can help coordinate care for multiple family members and provide wellness guidance.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Kid-Friendly Resources</h3>
+                    <p>Age-appropriate health education materials, activities, and resources to help children learn healthy habits.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Family Health Portal</h3>
+                    <p>Manage your entire family's healthcare from one account with our convenient family portal and app.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>Dependent Coverage</h3>
+                    <p>Coverage for children up to age 26, regardless of whether they live at home, attend school, or are married.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <h2>Family Plan Pricing</h2>
+            <p>Affordable coverage options that grow with your family</p>
+            
+            <div class="pricing-options">
+                <div class="pricing-card">
+                    <h3>Bronze Family</h3>
+                    <p>Essential coverage for families on a budget</p>
+                    <div class="price">$499<span>/month</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> $40 Primary Care Visits</li>
+                        <li><i class="fas fa-check"></i> $75 Specialist Visits</li>
+                        <li><i class="fas fa-check"></i> $10,000 Family Deductible</li>
+                        <li><i class="fas fa-check"></i> 30% Coinsurance</li>
+                        <li><i class="fas fa-check"></i> $16,000 Family Out-of-pocket Maximum</li>
+                    </ul>
+                    <a href="register.html" class="btn btn-outline" style="color: white; border-color: white; margin-top: 20px;">Enroll Now</a>
+                </div>
+                
+                <div class="pricing-card" style="transform: scale(1.05); border: 2px solid #FBBC05;">
+                    <span style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background-color: #FBBC05; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold;">Most Popular</span>
+                    <h3>Silver Family</h3>
+                    <p>Balanced coverage with lower out-of-pocket costs</p>
+                    <div class="price">$699<span>/month</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> $30 Primary Care Visits</li>
+                        <li><i class="fas fa-check"></i> $50 Specialist Visits</li>
+                        <li><i class="fas fa-check"></i> $7,000 Family Deductible</li>
+                        <li><i class="fas fa-check"></i> 20% Coinsurance</li>
+                        <li><i class="fas fa-check"></i> $12,000 Family Out-of-pocket Maximum</li>
+                    </ul>
+                    <a href="register.html" class="btn btn-primary" style="margin-top: 20px;">Enroll Now</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Gold Family</h3>
+                    <p>Premium coverage with lowest out-of-pocket costs</p>
+                    <div class="price">$899<span>/month</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> $20 Primary Care Visits</li>
+                        <li><i class="fas fa-check"></i> $35 Specialist Visits</li>
+                        <li><i class="fas fa-check"></i> $4,000 Family Deductible</li>
+                        <li><i class="fas fa-check"></i> 10% Coinsurance</li>
+                        <li><i class="fas fa-check"></i> $8,000 Family Out-of-pocket Maximum</li>
+                    </ul>
+                    <a href="register.html" class="btn btn-outline" style="color: white; border-color: white; margin-top: 20px;">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Coverage Details -->
+    <section class="coverage-section">
+        <div class="container">
+            <h2>Family Plan Coverage Details</h2>
+            <p>Comprehensive coverage for every member of your family</p>
+            
+            <table class="coverage-table">
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Bronze Family</th>
+                        <th>Silver Family</th>
+                        <th>Gold Family</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Preventive Care</td>
+                        <td>100% Covered</td>
+                        <td>100% Covered</td>
+                        <td>100% Covered</td>
+                    </tr>
+                    <tr>
+                        <td>Well-Child Visits</td>
+                        <td>100% Covered</td>
+                        <td>100% Covered</td>
+                        <td>100% Covered</td>
+                    </tr>
+                    <tr>
+                        <td>Primary Care Visits</td>
+                        <td>$40 Copay</td>
+                        <td>$30 Copay</td>
+                        <td>$20 Copay</td>
+                    </tr>
+                    <tr>
+                        <td>Specialist Visits</td>
+                        <td>$75 Copay</td>
+                        <td>$50 Copay</td>
+                        <td>$35 Copay</td>
+                    </tr>
+                    <tr>
+                        <td>Pediatric Specialist</td>
+                        <td>$60 Copay</td>
+                        <td>$40 Copay</td>
+                        <td>$25 Copay</td>
+                    </tr>
+                    <tr>
+                        <td>Urgent Care</td>
+                        <td>$75 Copay</td>
+                        <td>$60 Copay</td>
+                        <td>$50 Copay</td>
+                    </tr>
+                    <tr>
+                        <td>Emergency Room</td>
+                        <td>30% after deductible</td>
+                        <td>20% after deductible</td>
+                        <td>10% after deductible</td>
+                    </tr>
+                    <tr>
+                        <td>Hospital Stay</td>
+                        <td>30% after deductible</td>
+                        <td>20% after deductible</td>
+                        <td>10% after deductible</td>
+                    </tr>
+                    <tr>
+                        <td>Maternity Care</td>
+                        <td>30% after deductible</td>
+                        <td>20% after deductible</td>
+                        <td>10% after deductible</td>
+                    </tr>
+                    <tr>
+                        <td>Child Dental Check-up</td>
+                        <td>100% Covered</td>
+                        <td>100% Covered</td>
+                        <td>100% Covered</td>
+                    </tr>
+                    <tr>
+                        <td>Child Vision Exam</td>
+                        <td>100% Covered</td>
+                        <td>100% Covered</td>
+                        <td>100% Covered</td>
+                    </tr>
+                    <tr>
+                        <td>Generic Drugs</td>
+                        <td>$15 Copay</td>
+                        <td>$10 Copay</td>
+                        <td>$5 Copay</td>
+                    </tr>
+                    <tr>
+                        <td>Preferred Brand Drugs</td>
+                        <td>$50 Copay</td>
+                        <td>$40 Copay</td>
+                        <td>$30 Copay</td>
+                    </tr>
+                    <tr>
+                        <td>Mental Health Visits</td>
+                        <td>$40 Copay</td>
+                        <td>$30 Copay</td>
+                        <td>$20 Copay</td>
+                    </tr>
+                    <tr>
+                        <td>Physical Therapy</td>
+                        <td>$50 Copay</td>
+                        <td>$40 Copay</td>
+                        <td>$25 Copay</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Family Plan FAQs</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How many family members can be covered under the Family Plan?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our Family Plan covers you, your spouse or domestic partner, and all dependent children up to age 26, regardless of how many children you have. There is no limit to the number of family members who can be covered under one Family Plan.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How does the family deductible work?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our Family Plan uses an aggregate deductible system, which means there are two ways to meet your deductible: either one family member meets their individual deductible (which is half of the family deductible), or multiple family members' expenses combine to reach the family deductible. Once either threshold is met, all covered services subject to the deductible will be covered for all family members for the remainder of the plan year.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What happens when my child turns 26?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>When your child turns 26, they will no longer be eligible for coverage under your Family Plan. However, we'll notify you before this occurs and provide information about individual plan options for your child. They will qualify for a Special Enrollment Period, allowing them to enroll in their own plan without waiting for the annual Open Enrollment Period.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Are prenatal and maternity services covered?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, all of our Family Plans include comprehensive prenatal, maternity, and postnatal care. This includes prenatal doctor visits, lab tests, ultrasounds, labor and delivery (including cesarean sections), hospital stays, and postnatal care. Newborns are automatically covered under your Family Plan for the first 30 days after birth.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I add a family member mid-year?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, certain life events qualify you for a Special Enrollment Period, allowing you to add family members mid-year. These events include marriage, birth, adoption, or placement for adoption or foster care. You typically have 60 days from the qualifying event to add the new family member to your plan.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is there a separate deductible for each family member?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>While each family member has an individual deductible (typically set at 50% of the family deductible), our plan also has an aggregate family deductible. This means that once your family's combined medical expenses reach the family deductible amount, all family members are considered to have met their deductibles for the year, even if some individuals haven't met their personal deductibles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Protect Your Entire Family</h2>
+            <p>Give your loved ones the security they deserve with our comprehensive Family Health Plan. Our enrollment specialists can help you select the right coverage level for your family's needs and budget.</p>
+            <a href="register.html" class="btn btn-primary">Enroll Your Family Today</a>
+            <a href="contact.html" class="btn btn-outline" style="margin-left: 15px;">Speak with a Family Specialist</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>HealthPlus</h3>
+                    <p>Your trusted partner for health insurance coverage. We're committed to providing affordable healthcare options for individuals and families.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Plans</h3>
+                    <ul>
+                        <li><a href="plans-individual.html">Individual Plan</a></li>
+                        <li><a href="plans-family.html">Family Plan</a></li>
+                        <li><a href="plans-medicare.html">Medicare Plan</a></li>
+                        <li><a href="plans-employer.html">Employer Plan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="resources-doctors.html">Find a Doctor</a></li>
+                        <li><a href="#">Pharmacy Services</a></li>
+                        <li><a href="resources-wellness.html">Wellness Tips</a></li>
+                        <li><a href="#">Member Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 1-800-555-HEALTH</li>
+                        <li><i class="fas fa-envelope"></i> support@healthplus.demo</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Insurance Way, Healthcare City, HC 12345</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 HealthPlus Insurance. All rights reserved. This is a demo website.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // FAQ Accordion Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close all other FAQ items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current FAQ item
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
