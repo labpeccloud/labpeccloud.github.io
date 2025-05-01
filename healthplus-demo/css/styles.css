@@ -661,3 +661,104 @@ footer {
     height: 100%;
     border-radius: var(--border-radius);
 }
+
+/* Add these styles to your styles.css file */
+
+/* Dropdown Navigation */
+nav ul li.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-toggle i {
+    margin-left: 5px;
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown.active .dropdown-toggle i {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background-color: var(--bg-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    z-index: 1001; /* Higher than the header z-index */
+}
+
+.dropdown.active .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    display: block;
+    margin: 0;
+}
+
+.dropdown-menu li a {
+    padding: 8px 15px;
+    display: block;
+    color: var(--text-color);
+    font-weight: normal;
+}
+
+.dropdown-menu li a:hover {
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    nav ul li {
+        width: 100%;
+        margin: 0;
+    }
+    
+    nav ul li a {
+        padding: 10px 0;
+        display: block;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        padding-left: 20px;
+        background-color: transparent;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, opacity 0.3s ease;
+    }
+    
+    .dropdown.active .dropdown-menu {
+        max-height: 200px;
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .dropdown-toggle {
+        justify-content: space-between;
+        width: 100%;
+    }
+}
