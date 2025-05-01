@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicare Plan - HealthPlus Insurance</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional styles for plan pages */
+        .plan-hero {
+            background-color: var(--bg-light);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .plan-hero h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .plan-hero p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+        
+        .plan-overview {
+            padding: 60px 0;
+            background-color: var(--bg-white);
+        }
+        
+        .plan-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .plan-detail-card {
+            flex: 1 0 300px;
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .plan-detail-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .plan-detail-card h3 i {
+            margin-right: 10px;
+        }
+        
+        .pricing-section {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .pricing-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .pricing-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            flex: 1 0 250px;
+            max-width: 350px;
+            box-shadow: var(--shadow-md);
+            color: var(--text-color);
+            text-align: left;
+            position: relative;
+        }
+        
+        .pricing-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 15px 0;
+            color: var(--accent-color);
+        }
+        
+        .price span {
+            font-size: 1rem;
+            font-weight: normal;
+        }
+        
+        .coverage-section {
+            padding: 60px 0;
+        }
+        
+        .coverage-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        
+        .coverage-table th, .coverage-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--bg-medium);
+        }
+        
+        .coverage-table th {
+            background-color: var(--bg-light);
+            font-weight: 600;
+        }
+        
+        .coverage-table tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+        
+        .medicare-features {
+            padding: 60px 0;
+            background-color: var(--bg-light);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+        
+        .comparison-section {
+            padding: 60px 0;
+            background-color: var(--bg-white);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            box-shadow: var(--shadow-sm);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--bg-medium);
+        }
+        
+        .comparison-table th {
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table th:first-child {
+            background-color: var(--bg-light);
+            color: var(--text-color);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table td:first-child {
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            background-color: var(--bg-white);
+        }
+        
+        .comparison-table tr:nth-child(even) td {
+            background-color: var(--bg-light);
+        }
+        
+        .comparison-table tr:nth-child(even) td:first-child {
+            background-color: var(--bg-medium);
+        }
+        
+        .faq-section {
+            background-color: var(--bg-light);
+            padding: 60px 0;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            background-color: var(--bg-white);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(251, 188, 5, 0.05);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 5px 20px 20px;
+            max-height: 500px;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .cta-section h2 {
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .eligibility-box {
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-top: 30px;
+            border-left: 5px solid var(--accent-color);
+        }
+        
+        .eligibility-box h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Dropdown Menus (Include your updated header here) -->
+    <header>
+        <div class="container">
+          <div class="logo">
+            <h1>HealthPlus</h1>
+          </div>
+          <nav>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li class="dropdown">
+                <a href="plans.html" class="dropdown-toggle">Plans <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                  <a href="plans-individual.html">Individual Plan</a>
+                  <a href="plans-family.html">Family Plan</a>
+                  <a href="plans-medicare.html">Medicare Plan</a>
+                  <a href="plans-employer.html">Employer Plan</a>
+                </div>
+              </li>
+              <li class="dropdown">
+                <a href="resources.html" class="dropdown-toggle">Resources <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                  <a href="resources-benefits.html">Understanding Benefits</a>
+                  <a href="resources-wellness.html">Wellness Tips</a>
+                  <a href="resources-doctors.html">Find a Doctor</a>
+                  <a href="resources-faq.html">FAQ</a>
+                </div>
+              </li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="buttons">
+            <a href="login.html" class="btn btn-outline">Sign In</a>
+            <a href="register.html" class="btn btn-primary">Register</a>
+          </div>
+        </div>
+    </header>
+    
+    <!-- Plan Hero Section -->
+    <section class="plan-hero">
+        <div class="container">
+            <h1>Medicare Advantage Plan</h1>
+            <p>Enhanced Medicare coverage with additional benefits beyond Original Medicare at affordable rates.</p>
+            <a href="#pricing" class="btn btn-primary">View Plan Options</a>
+        </div>
+    </section>
+    
+    <!-- Plan Overview -->
+    <section class="plan-overview">
+        <div class="container">
+            <h2>Comprehensive Medicare Coverage and More</h2>
+            <p>Our Medicare Advantage Plan offers all the benefits of Original Medicare (Part A and Part B) plus additional coverage for prescription drugs, dental, vision, hearing aids, and wellness programs—all combined into one convenient plan.</p>
+            
+            <div class="eligibility-box">
+                <h3><i class="fas fa-clipboard-check"></i> Medicare Eligibility</h3>
+                <p>You're eligible for our Medicare Advantage Plan if you:</p>
+                <ul>
+                    <li>Are 65 years or older, OR</li>
+                    <li>Have a qualifying disability, OR</li>
+                    <li>Have End-Stage Renal Disease (ESRD) or ALS</li>
+                </ul>
+                <p>AND you're enrolled in both Medicare Part A and Part B and live in our service area.</p>
+            </div>
+            
+            <div class="plan-details">
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-hospital"></i> Hospital Coverage</h3>
+                    <p>Comprehensive inpatient hospital care, skilled nursing facility care, home health care, and hospice care with lower out-of-pocket costs than Original Medicare alone.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-user-md"></i> Doctor Visits</h3>
+                    <p>Coverage for doctor visits, specialist consultations, preventive services, and outpatient care with low copays and access to a broad network of healthcare providers.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-pills"></i> Prescription Drugs</h3>
+                    <p>Comprehensive prescription drug coverage (Medicare Part D) included in all our Medicare Advantage plans, with affordable copays and access to thousands of pharmacies.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-tooth"></i> Dental & Vision</h3>
+                    <p>Dental examinations, cleanings, fillings, dentures, routine eye exams, glasses, and contact lenses—benefits not covered by Original Medicare.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-heartbeat"></i> Wellness Programs</h3>
+                    <p>Access to fitness programs, nutrition counseling, health education, and disease management programs designed specifically for seniors.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-phone-alt"></i> 24/7 Support</h3>
+                    <p>Round-the-clock access to nurse advice lines, telehealth services, and dedicated Medicare Advantage customer service representatives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Medicare-Specific Features -->
+    <section class="medicare-features">
+        <div class="container">
+            <h2>Why Choose HealthPlus Medicare Advantage?</h2>
+            <p>Our Medicare Advantage plans offer more benefits than Original Medicare at competitive rates.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3>Low or No Premiums</h3>
+                    <p>Many of our Medicare Advantage plans have $0 monthly premiums beyond your Medicare Part B premium.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Maximum Out-of-Pocket Protection</h3>
+                    <p>All our plans have an annual limit on your out-of-pocket expenses, protecting you from unexpected costs.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <h3>One Card Simplicity</h3>
+                    <p>One membership card for all your healthcare needs—medical, hospital, prescription drugs, dental, and vision.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Extensive Provider Network</h3>
+                    <p>Access to a large network of doctors, specialists, hospitals, and healthcare facilities that accept our Medicare Advantage plans.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3>Travel Coverage</h3>
+                    <p>Emergency and urgent care coverage when you travel within the United States and limited coverage for emergency care abroad.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shuttle-van"></i>
+                    </div>
+                    <h3>Transportation Benefits</h3>
+                    <p>Coverage for transportation to medical appointments, ensuring you never miss important healthcare visits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Comparison with Original Medicare -->
+    <section class="comparison-section">
+        <div class="container">
+            <h2>How Our Medicare Advantage Plan Compares</h2>
+            <p>See how our Medicare Advantage plans offer more benefits than Original Medicare alone.</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Benefits</th>
+                        <th>Original Medicare</th>
+                        <th>HealthPlus Medicare Advantage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Hospital Insurance (Part A)</td>
+                        <td><i class="fas fa-check"></i> Covered</td>
+                        <td><i class="fas fa-check"></i> Covered</td>
+                    </tr>
+                    <tr>
+                        <td>Medical Insurance (Part B)</td>
+                        <td><i class="fas fa-check"></i> Covered</td>
+                        <td><i class="fas fa-check"></i> Covered</td>
+                    </tr>
+                    <tr>
+                        <td>Prescription Drug Coverage</td>
+                        <td><i class="fas fa-times"></i> Not Covered</td>
+                        <td><i class="fas fa-check"></i> Covered</td>
+                    </tr>
+                    <tr>
+                        <td>Dental Services</td>
+                        <td><i class="fas fa-times"></i> Not Covered</td>
+                        <td><i class="fas fa-check"></i> Covered</td>
+                    </tr>
+                    <tr>
+                        <td>Vision Services</td>
+                        <td><i class="fas fa-times"></i> Not Covered</td>
+                        <td><i class="fas fa-check"></i> Covered</td>
+                    </tr>
+                    <tr>
+                        <td>Hearing Aids</td>
+                        <td><i class="fas fa-times"></i> Not Covered</td>
+                        <td><i class="fas fa-check"></i> Covered</td>
+                    </tr>
+                    <tr>
+                        <td>Fitness Programs</td>
+                        <td><i class="fas fa-times"></i> Not Covered</td>
+                        <td><i class="fas fa-check"></i> Covered</td>
+                    </tr>
+                    <tr>
+                        <td>Over-the-Counter Allowance</td>
+                        <td><i class="fas fa-times"></i> Not Covered</td>
+                        <td><i class="fas fa-check"></i> Covered</td>
+                    </tr>
+                    <tr>
+                        <td>Out-of-Pocket Maximum</td>
+                        <td><i class="fas fa-times"></i> No Limit</td>
+                        <td><i class="fas fa-check"></i> Protected by Annual Limit</td>
+                    </tr>
+                    <tr>
+                        <td>Care Coordination</td>
+                        <td><i class="fas fa-times"></i> Not Provided</td>
+                        <td><i class="fas fa-check"></i> Provided</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <h2>Medicare Advantage Plan Options</h2>
+            <p>Choose the plan that best meets your healthcare needs and budget</p>
+            
+            <div class="pricing-options">
+                <div class="pricing-card">
+                    <h3>Basic Advantage</h3>
+                    <p>Essential coverage for Medicare beneficiaries</p>
+                    <div class="price">$0<span>/month</span></div>
+                    <p><small>(plus your Medicare Part B premium)</small></p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> $0 Primary Care Visits</li>
+                        <li><i class="fas fa-check"></i> $35 Specialist Visits</li>
+                        <li><i class="fas fa-check"></i> $395/day for Days 1-4 of Inpatient Hospital Stay</li>
+                        <li><i class="fas fa-check"></i> Basic Dental Coverage</li>
+                        <li><i class="fas fa-check"></i> Annual Eye Exam</li>
+                        <li><i class="fas fa-check"></i> $6,700 Out-of-pocket Maximum</li>
+                    </ul>
+                    <a href="register.html" class="btn btn-outline" style="color: white; border-color: white; margin-top: 20px;">Enroll Now</a>
+                </div>
+                
+                <div class="pricing-card" style="transform: scale(1.05); border: 2px solid #FBBC05;">
+                    <span style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background-color: #FBBC05; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold;">Most Popular</span>
+                    <h3>Premium Advantage</h3>
+                    <p>Enhanced coverage with lower out-of-pocket costs</p>
+                    <div class="price">$29<span>/month</span></div>
+                    <p><small>(plus your Medicare Part B premium)</small></p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> $0 Primary Care Visits</li>
+                        <li><i class="fas fa-check"></i> $25 Specialist Visits</li>
+                        <li><i class="fas fa-check"></i> $250/day for Days 1-5 of Inpatient Hospital Stay</li>
+                        <li><i class="fas fa-check"></i> Comprehensive Dental Coverage</li>
+                        <li><i class="fas fa-check"></i> Vision Coverage with $200 Allowance for Eyewear</li>
+                        <li><i class="fas fa-check"></i> $4,900 Out-of-pocket Maximum</li>
+                    </ul>
+                    <a href="register.html" class="btn btn-primary" style="margin-top: 20px;">Enroll Now</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Elite Advantage</h3>
+                    <p>Premium coverage with extensive additional benefits</p>
+                    <div class="price">$79<span>/month</span></div>
+                    <p><small>(plus your Medicare Part B premium)</small></p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> $0 Primary Care Visits</li>
+                        <li><i class="fas fa-check"></i> $15 Specialist Visits</li>
+                        <li><i class="fas fa-check"></i> $175/day for Days 1-5 of Inpatient Hospital Stay</li>
+                        <li><i class="fas fa-check"></i> Premium Dental Coverage</li>
+                        <li><i class="fas fa-check"></i> Vision Coverage with $300 Allowance for Eyewear</li>
+                        <li><i class="fas fa-check"></i> $3,400 Out-of-pocket Maximum</li>
+                    </ul>
+                    <a href="register.html" class="btn btn-outline" style="color: white; border-color: white; margin-top: 20px;">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Coverage Details -->
+    <section class="coverage-section">
+        <div class="container">
+            <h2>Medicare Advantage Coverage Details</h2>
+            <p>Comprehensive coverage for Medicare beneficiaries</p>
+            
+            <table class="coverage-table">
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Basic Advantage</th>
+                        <th>Premium Advantage</th>
+                        <th>Elite Advantage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Monthly Premium</td>
+                        <td>$0</td>
+                        <td>$29</td>
+                        <td>$79</td>
+                    </tr>
+                    <tr>
+                        <td>Primary Care Visits</td>
+                        <td>$0 Copay</td>
+                        <td>$0 Copay</td>
+                        <td>$0 Copay</td>
+                    </tr>
+                    <tr>
+                        <td>Specialist Visits</td>
+                        <td>$35 Copay</td>
+                        <td>$25 Copay</td>
+                        <td>$15 Copay</td>
+                    </tr>
+                    <tr>
+                        <td>Preventive Care</td>
+                        <td>$0 Copay</td>
+                        <td>$0 Copay</td>
+                        <td>$0 Copay</td>
+                    </tr>
+                    <tr>
+                        <td>Inpatient Hospital</td>
+                        <td>$395/day (Days 1-4)</td>
+                        <td>$250/day (Days 1-5)</td>
+                        <td>$175/day (Days 1-5)</td>
+                    </tr>
+                    <tr>
+                        <td>Outpatient Surgery</td>
+                        <td>$395 Copay</td>
+                        <td>$250 Copay</td>
+                        <td>$150 Copay</td>
+                    </tr>
+                    <tr>
+                        <td>Emergency Room</td>
+                        <td>$90 Copay</td>
+                        <td>$90 Copay</td>
+                        <td>$80 Copay</td>
+                    </tr>
+                    <tr>
+                        <td>Urgent Care</td>
+                        <td>$40 Copay</td>
+                        <td>$30 Copay</td>
+                        <td>$25 Copay</td>
+                    </tr>
+                    <tr>
+                        <td>Ambulance</td>
+                        <td>$295 Copay</td>
+                        <td>$250 Copay</td>
+                        <td>$200 Copay</td>
+                    </tr>
+                    <tr>
+                        <td>Diagnostic Tests & X-rays</td>
+                        <td>20% Coinsurance</td>
+                        <td>15% Coinsurance</td>
+                        <td>10% Coinsurance</td>
+                    </tr>
+                    <tr>
+                        <td>Hearing Aids</td>
+                        <td>$500 Allowance</td>
+                        <td>$1,000 Allowance</td>
+                        <td>$1,500 Allowance</td>
+                    </tr>
+                    <tr>
+                        <td>Dental Coverage</td>
+                        <td>Basic: Cleanings, Exams, X-rays</td>
+                        <td>Comprehensive: Includes Fillings, Extractions</td>
+                        <td>Premium: Includes Crowns, Dentures</td>
+                    </tr>
+                    <tr>
+                        <td>Vision Coverage</td>
+                        <td>Annual Exam + $100 Allowance</td>
+                        <td>Annual Exam + $200 Allowance</td>
+                        <td>Annual Exam + $300 Allowance</td>
+                    </tr>
+                    <tr>
+                        <td>Over-the-Counter Allowance</td>
+                        <td>$50 Quarterly</td>
+                        <td>$75 Quarterly</td>
+                        <td>$100 Quarterly</td>
+                    </tr>
+                    <tr>
+                        <td>Fitness Membership</td>
+                        <td>Basic SilverSneakers</td>
+                        <td>Full SilverSneakers</td>
+                        <td>SilverSneakers + Home Fitness Kits</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Medicare Advantage FAQs</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What is the difference between Original Medicare and Medicare Advantage?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Original Medicare is the traditional fee-for-service program offered directly through the federal government, consisting of Part A (hospital insurance) and Part B (medical insurance). Medicare Advantage, also known as Medicare Part C, is an alternative to Original Medicare offered by private insurance companies like HealthPlus.</p>
+                        <p>Medicare Advantage plans provide all the benefits of Original Medicare plus additional coverage such as prescription drugs, dental, vision, hearing, and wellness programs, often with lower out-of-pocket costs. Unlike Original Medicare, Medicare Advantage plans have an annual limit on your out-of-pocket expenses.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I keep my current doctors with your Medicare Advantage plan?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can continue seeing your current doctors if they participate in our network. HealthPlus Medicare Advantage has one of the largest provider networks, so there's a good chance your doctors are already in-network. Before enrolling, you can use our Provider Directory tool on our website to verify if your doctors participate in our network.</p>
+                        <p>If your doctor is not in our network, you may still be able to see them, but your out-of-pocket costs may be higher. Some of our plans also offer out-of-network coverage, giving you more flexibility in choosing your healthcare providers.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>When can I enroll in a Medicare Advantage plan?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can enroll in a Medicare Advantage plan during these periods:</p>
+                        <ul>
+                            <li><strong>Initial Enrollment Period:</strong> When you first become eligible for Medicare (typically three months before the month you turn 65, the month of your birthday, and three months after)</li>
+                            <li><strong>Annual Enrollment Period:</strong> October 15 to December 7 each year</li>
+                            <li><strong>Medicare Advantage Open Enrollment Period:</strong> January 1 to March 31 each year (if you're already enrolled in a Medicare Advantage plan)</li>
+                            <li><strong>Special Enrollment Period:</strong> If you qualify due to certain life events like moving, losing other coverage, or qualifying for Extra Help</li>
+                        </ul>
+                        <p>Our Medicare specialists can help determine the best enrollment period for your situation.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do I still pay my Medicare Part B premium with Medicare Advantage?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you must continue paying your Medicare Part B premium in addition to any premium charged by your Medicare Advantage plan. The standard Part B premium is set by Medicare each year, and most people have this amount deducted from their Social Security benefits.</p>
+                        <p>Some of our Medicare Advantage plans have $0 premiums, which means you pay no additional premium beyond your Part B premium. Other plans may have a monthly premium that provides enhanced benefits and lower out-of-pocket costs.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What happens if I need care while traveling?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>All HealthPlus Medicare Advantage plans cover emergency and urgent care anywhere in the United States. If you're traveling within the U.S. and have a medical emergency or need urgent care, you can go to any hospital or urgent care facility, even if it's outside of our network.</p>
+                        <p>For international travel, our plans provide emergency coverage in certain situations, typically with a higher copay or coinsurance. Some of our premium plans offer more extensive travel coverage. Before traveling internationally, we recommend contacting our Member Services team to understand your coverage details.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I switch back to Original Medicare if I don't like my Medicare Advantage plan?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you can switch back to Original Medicare during the Medicare Advantage Open Enrollment Period (January 1 to March 31) or during the Annual Enrollment Period (October 15 to December 7). If you switch back to Original Medicare, you might also want to enroll in a standalone Medicare Part D plan for prescription drug coverage and consider a Medicare Supplement (Medigap) policy to help cover some of the out-of-pocket costs of Original Medicare.</p>
+                        <p>Keep in mind that if you switch back to Original Medicare and want to purchase a Medigap policy, you might be subject to medical underwriting, which could affect your eligibility or premium.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Enhance Your Medicare Coverage?</h2>
+            <p>Join thousands of satisfied members who have discovered the benefits of HealthPlus Medicare Advantage. Our Medicare specialists are ready to help you choose the right plan for your healthcare needs and budget.</p>
+            <a href="register.html" class="btn btn-primary">Enroll Today</a>
+            <a href="contact.html" class="btn btn-outline" style="margin-left: 15px;">Speak with a Medicare Specialist</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>HealthPlus</h3>
+                    <p>Your trusted partner for health insurance coverage. We're committed to providing affordable healthcare options for individuals and families.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Plans</h3>
+                    <ul>
+                        <li><a href="plans-individual.html">Individual Plan</a></li>
+                        <li><a href="plans-family.html">Family Plan</a></li>
+                        <li><a href="plans-medicare.html">Medicare Plan</a></li>
+                        <li><a href="plans-employer.html">Employer Plan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="resources-doctors.html">Find a Doctor</a></li>
+                        <li><a href="#">Pharmacy Services</a></li>
+                        <li><a href="resources-wellness.html">Wellness Tips</a></li>
+                        <li><a href="#">Member Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 1-800-555-HEALTH</li>
+                        <li><i class="fas fa-envelope"></i> support@healthplus.demo</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Insurance Way, Healthcare City, HC 12345</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 HealthPlus Insurance. All rights reserved. This is a demo website.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // FAQ Accordion Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close all other FAQ items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current FAQ item
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
