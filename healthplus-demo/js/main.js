@@ -167,3 +167,71 @@ function showModal(title, content) {
         }
     });
 }
+
+// Function to set up dropdown menu functionality
+function setupDropdownMenus() {
+    const dropdowns = document.querySelectorAll('nav ul li.dropdown');
+    
+    // Add click event to each dropdown toggle
+    dropdowns.forEach(dropdown => {
+        const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+        
+        // Toggle dropdown on click
+        dropdownToggle.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent navigating to the main category page
+            
+            // Close all other dropdowns
+            dropdowns.forEach(item => {
+                if (item !== dropdown && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            // Toggle current dropdown
+            dropdown.classList.toggle('active');
+        });
+    });
+    
+    // Close dropdown when clicking outside of nav
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('nav')) {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+    
+    // For desktop, add optional hover functionality (activate if needed)
+    if (window.innerWidth >= 768) {
+        dropdowns.forEach(dropdown => {
+            // Uncomment these lines if you want hover behavior instead of click on desktop
+            /*
+            dropdown.addEventListener('mouseenter', function() {
+                this.classList.add('active');
+            });
+            
+            dropdown.addEventListener('mouseleave', function() {
+                this.classList.remove('active');
+            });
+            */
+        });
+    }
+}
+
+// Update the DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle functionality (for responsive design)
+    setupMobileMenu();
+    
+    // Plan finder form submission
+    setupPlanFinder();
+    
+    // Smooth scrolling for anchor links
+    setupSmoothScrolling();
+    
+    // Add active class to current page in navigation
+    highlightCurrentPage();
+    
+    // Add dropdown menu functionality
+    setupDropdownMenus();
+});
