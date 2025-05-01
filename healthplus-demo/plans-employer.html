@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Plan - HealthPlus Insurance</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional styles for plan pages */
+        .plan-hero {
+            background-color: var(--bg-light);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .plan-hero h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .plan-hero p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+        
+        .plan-overview {
+            padding: 60px 0;
+            background-color: var(--bg-white);
+        }
+        
+        .plan-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .plan-detail-card {
+            flex: 1 0 300px;
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .plan-detail-card h3 {
+            color: var(--danger-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .plan-detail-card h3 i {
+            margin-right: 10px;
+        }
+        
+        .pricing-section {
+            background-color: var(--danger-color);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .pricing-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .pricing-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            flex: 1 0 250px;
+            max-width: 350px;
+            box-shadow: var(--shadow-md);
+            color: var(--text-color);
+            text-align: left;
+            position: relative;
+        }
+        
+        .pricing-card h3 {
+            color: var(--danger-color);
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 15px 0;
+            color: var(--danger-color);
+        }
+        
+        .price span {
+            font-size: 1rem;
+            font-weight: normal;
+        }
+        
+        .coverage-section {
+            padding: 60px 0;
+        }
+        
+        .coverage-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        
+        .coverage-table th, .coverage-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--bg-medium);
+        }
+        
+        .coverage-table th {
+            background-color: var(--bg-light);
+            font-weight: 600;
+        }
+        
+        .coverage-table tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+        
+        .employer-features {
+            padding: 60px 0;
+            background-color: var(--bg-light);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--danger-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--danger-color);
+        }
+        
+        .testimonial-section {
+            padding: 60px 0;
+            background-color: var(--bg-white);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+        
+        .testimonial-card:before {
+            content: '"';
+            font-size: 5rem;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            color: rgba(234, 67, 53, 0.1);
+            font-family: serif;
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--bg-medium);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+        
+        .author-details h4 {
+            margin: 0;
+            font-size: 1rem;
+        }
+        
+        .author-details p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .faq-section {
+            background-color: var(--bg-light);
+            padding: 60px 0;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            background-color: var(--bg-white);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(234, 67, 53, 0.05);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 5px 20px 20px;
+            max-height: 500px;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .cta-section h2 {
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .business-level-section {
+            padding: 60px 0;
+            background-color: var(--bg-white);
+        }
+        
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .business-card {
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            border-top: 5px solid var(--danger-color);
+        }
+        
+        .business-card h3 {
+            color: var(--danger-color);
+            margin-bottom: 15px;
+        }
+        
+        .employee-count {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Dropdown Menus (Include your updated header here) -->
+    <header>
+        <div class="container">
+          <div class="logo">
+            <h1>HealthPlus</h1>
+          </div>
+          <nav>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li class="dropdown">
+                <a href="plans.html" class="dropdown-toggle">Plans <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                  <a href="plans-individual.html">Individual Plan</a>
+                  <a href="plans-family.html">Family Plan</a>
+                  <a href="plans-medicare.html">Medicare Plan</a>
+                  <a href="plans-employer.html">Employer Plan</a>
+                </div>
+              </li>
+              <li class="dropdown">
+                <a href="resources.html" class="dropdown-toggle">Resources <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                  <a href="resources-benefits.html">Understanding Benefits</a>
+                  <a href="resources-wellness.html">Wellness Tips</a>
+                  <a href="resources-doctors.html">Find a Doctor</a>
+                  <a href="resources-faq.html">FAQ</a>
+                </div>
+              </li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="buttons">
+            <a href="login.html" class="btn btn-outline">Sign In</a>
+            <a href="register.html" class="btn btn-primary">Register</a>
+          </div>
+        </div>
+    </header>
+    
+    <!-- Plan Hero Section -->
+    <section class="plan-hero">
+        <div class="container">
+            <h1>Employer Health Plans</h1>
+            <p>Comprehensive and customizable group health insurance solutions for businesses of all sizes.</p>
+            <a href="#pricing" class="btn btn-primary">View Plan Options</a>
+        </div>
+    </section>
+    
+    <!-- Business Levels Section -->
+    <section class="business-level-section">
+        <div class="container">
+            <h2>Tailored Solutions for Every Business</h2>
+            <p>HealthPlus offers group health insurance plans that can be customized to meet the unique needs of your organization, whether you're a small startup or a large corporation.</p>
+            
+            <div class="business-grid">
+                <div class="business-card">
+                    <h3>Small Business</h3>
+                    <div class="employee-count">2-50 Employees</div>
+                    <p>Affordable, ACA-compliant health insurance plans designed specifically for small businesses, with simplified administration and excellent coverage options.</p>
+                    <a href="#small-business" class="btn btn-outline" style="margin-top: 20px;">Learn More</a>
+                </div>
+                
+                <div class="business-card">
+                    <h3>Mid-Size Business</h3>
+                    <div class="employee-count">51-300 Employees</div>
+                    <p>Flexible health plans with more customization options, wellness programs, and enhanced benefits to help you attract and retain top talent.</p>
+                    <a href="#mid-size" class="btn btn-outline" style="margin-top: 20px;">Learn More</a>
+                </div>
+                
+                <div class="business-card">
+                    <h3>Large Enterprise</h3>
+                    <div class="employee-count">301+ Employees</div>
+                    <p>Fully customizable health solutions with multiple plan options, administrative support, dedicated account management, and comprehensive reporting.</p>
+                    <a href="#enterprise" class="btn btn-outline" style="margin-top: 20px;">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Plan Overview -->
+    <section class="plan-overview">
+        <div class="container">
+            <h2>Why Choose HealthPlus for Your Business?</h2>
+            <p>HealthPlus Employer Plans help you provide comprehensive health coverage to your employees while controlling costs and simplifying administration. Our group health insurance plans are designed to meet the diverse needs of your workforce while providing you with the tools and support to manage your benefits effectively.</p>
+            
+            <div class="plan-details">
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-dollar-sign"></i> Cost-Effective Solutions</h3>
+                    <p>Group rates that are typically lower than individual insurance premiums, tax advantages for your business, and options to share costs with employees through various contribution strategies.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-user-md"></i> Comprehensive Coverage</h3>
+                    <p>Access to our extensive network of doctors, specialists, hospitals, and healthcare facilities, ensuring your employees receive quality care when they need it.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-sliders-h"></i> Flexible Plan Options</h3>
+                    <p>Multiple plan designs to choose from, allowing you to offer different levels of coverage to meet the diverse needs of your workforce and your budget.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-chart-line"></i> Wellness Programs</h3>
+                    <p>Integrated wellness initiatives that help improve employee health, increase productivity, reduce absenteeism, and potentially lower your long-term healthcare costs.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-laptop"></i> Easy Administration</h3>
+                    <p>User-friendly employer portal for managing enrollment, billing, and plan changes, plus dedicated support from our business services team.</p>
+                </div>
+                
+                <div class="plan-detail-card">
+                    <h3><i class="fas fa-headset"></i> Dedicated Support</h3>
+                    <p>Personalized assistance from account managers who understand your business needs and can help you maximize the value of your health benefits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Employer-Specific Features -->
+    <section class="employer-features">
+        <div class="container">
+            <h2>Features That Set Us Apart</h2>
+            <p>HealthPlus Employer Plans include special tools and services designed to help businesses manage their employee benefits effectively.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Benefits Administration</h3>
+                    <p>Our online platform simplifies enrollment, eligibility management, billing, and reporting, saving you time and reducing administrative burden.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Employee Wellness</h3>
+                    <p>Customizable wellness programs including health assessments, fitness challenges, nutrition resources, and mental health support.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Analytics & Reporting</h3>
+                    <p>Detailed reporting on plan utilization, claims, and health trends to help you make informed decisions about your benefits strategy.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile App Access</h3>
+                    <p>User-friendly mobile app for employees to access ID cards, find providers, check claims, and manage their benefits on the go.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Dedicated Account Manager</h3>
+                    <p>A single point of contact for all your benefit needs, providing personalized service and support for your business.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Employee Education</h3>
+                    <p>Resources and tools to help your employees understand and maximize their benefits, including webinars, videos, and educational materials.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <h2>Affordable Group Health Insurance</h2>
+            <p>Flexible plan options to fit your budget and your employees' needs</p>
+            
+            <div class="pricing-options">
+                <div class="pricing-card">
+                    <h3>Standard PPO</h3>
+                    <p>Balanced coverage with nationwide provider access</p>
+                    <div class="price">Starting at<br>$350<span>/employee/month</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> $30 Primary Care Visits</li>
+                        <li><i class="fas fa-check"></i> $60 Specialist Visits</li>
+                        <li><i class="fas fa-check"></i> $2,500 Individual Deductible</li>
+                        <li><i class="fas fa-check"></i> 20% Coinsurance</li>
+                        <li><i class="fas fa-check"></i> $6,500 Out-of-pocket Maximum</li>
+                        <li><i class="fas fa-check"></i> Prescription Coverage Included</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-outline" style="color: white; border-color: white; margin-top: 20px;">Request a Quote</a>
+                </div>
+                
+                <div class="pricing-card" style="transform: scale(1.05); border: 2px solid #FBBC05;">
+                    <span style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background-color: #FBBC05; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold;">Most Popular</span>
+                    <h3>Premium PPO</h3>
+                    <p>Enhanced coverage with lower out-of-pocket costs</p>
+                    <div class="price">Starting at<br>$450<span>/employee/month</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> $20 Primary Care Visits</li>
+                        <li><i class="fas fa-check"></i> $40 Specialist Visits</li>
+                        <li><i class="fas fa-check"></i> $1,500 Individual Deductible</li>
+                        <li><i class="fas fa-check"></i> 15% Coinsurance</li>
+                        <li><i class="fas fa-check"></i> $4,000 Out-of-pocket Maximum</li>
+                        <li><i class="fas fa-check"></i> Enhanced Prescription Coverage</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-primary" style="margin-top: 20px;">Request a Quote</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>HDHP with HSA</h3>
+                    <p>Tax-advantaged plan with health savings account</p>
+                    <div class="price">Starting at<br>$300<span>/employee/month</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> No Copays (Deductible Applies)</li>
+                        <li><i class="fas fa-check"></i> $3,000 Individual Deductible</li>
+                        <li><i class="fas fa-check"></i> 15% Coinsurance After Deductible</li>
+                        <li><i class="fas fa-check"></i> $7,000 Out-of-pocket Maximum</li>
+                        <li><i class="fas fa-check"></i> HSA-Compatible Plan</li>
+                        <li><i class="fas fa-check"></i> 100% Preventive Care Coverage</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-outline" style="color: white; border-color: white; margin-top: 20px;">Request a Quote</a>
+                </div>
+            </div>
+            <p style="margin-top: 30px; font-size: 0.9rem;">* Pricing is illustrative and may vary based on group size, location, plan design, and other factors. Contact us for a personalized quote.</p>
+        </div>
+    </section>
+    
+    <!-- Coverage Details -->
+    <section class="coverage-section">
+        <div class="container">
+            <h2>Plan Comparison</h2>
+            <p>See how our different employer plan options compare</p>
+            
+            <table class="coverage-table">
+                <thead>
+                    <tr>
+                        <th>Feature/Benefit</th>
+                        <th>Standard PPO</th>
+                        <th>Premium PPO</th>
+                        <th>HDHP with HSA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Monthly Premium</td>
+                        <td>$$</td>
+                        <td>$$</td>
+                        <td>$</td>
+                    </tr>
+                    <tr>
+                        <td>Primary Care Visits</td>
+                        <td>$30 Copay</td>
+                        <td>$20 Copay</td>
+                        <td>Deductible then 15%</td>
+                    </tr>
+                    <tr>
+                        <td>Specialist Visits</td>
+                        <td>$60 Copay</td>
+                        <td>$40 Copay</td>
+                        <td>Deductible then 15%</td>
+                    </tr>
+                    <tr>
+                        <td>Individual Deductible</td>
+                        <td>$2,500</td>
+                        <td>$1,500</td>
+                        <td>$3,000</td>
+                    </tr>
+                    <tr>
+                        <td>Family Deductible</td>
+                        <td>$5,000</td>
+                        <td>$3,000</td>
+                        <td>$6,000</td>
+                    </tr>
+                    <tr>
+                        <td>Coinsurance</td>
+                        <td>20%</td>
+                        <td>15%</td>
+                        <td>15%</td>
+                    </tr>
+                    <tr>
+                        <td>Individual Out-of-Pocket Max</td>
+                        <td>$6,500</td>
+                        <td>$4,000</td>
+                        <td>$7,000</td>
+                    </tr>
+                    <tr>
+                        <td>Family Out-of-Pocket Max</td>
+                        <td>$13,000</td>
+                        <td>$8,000</td>
+                        <td>$14,000</td>
+                    </tr>
+                    <tr>
+                        <td>Preventive Care</td>
+                        <td>100% Covered</td>
+                        <td>100% Covered</td>
+                        <td>100% Covered</td>
+                    </tr>
+                    <tr>
+                        <td>Urgent Care</td>
+                        <td>$75 Copay</td>
+                        <td>$50 Copay</td>
+                        <td>Deductible then 15%</td>
+                    </tr>
+                    <tr>
+                        <td>Emergency Room</td>
+                        <td>$300 Copay</td>
+                        <td>$200 Copay</td>
+                        <td>Deductible then 15%</td>
+                    </tr>
+                    <tr>
+                        <td>Inpatient Hospital</td>
+                        <td>Deductible then 20%</td>
+                        <td>Deductible then 15%</td>
+                        <td>Deductible then 15%</td>
+                    </tr>
+                    <tr>
+                        <td>Generic Drugs</td>
+                        <td>$15 Copay</td>
+                        <td>$10 Copay</td>
+                        <td>Deductible then 15%</td>
+                    </tr>
+                    <tr>
+                        <td>Preferred Brand Drugs</td>
+                        <td>$50 Copay</td>
+                        <td>$35 Copay</td>
+                        <td>Deductible then 15%</td>
+                    </tr>
+                    <tr>
+                        <td>Health Savings Account (HSA)</td>
+                        <td>Not Eligible</td>
+                        <td>Not Eligible</td>
+                        <td>Eligible</td>
+                    </tr>
+                    <tr>
+                        <td>Telemedicine</td>
+                        <td>$10 Copay</td>
+                        <td>$0 Copay</td>
+                        <td>Deductible then 15%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonial-section">
+        <div class="container">
+            <h2>What Our Business Clients Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Switching to HealthPlus was one of the best decisions we made for our growing team. Their plans are comprehensive yet affordable, and the administrative platform has saved our HR department countless hours.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-details">
+                            <h4>Sarah Johnson</h4>
+                            <p>HR Director, TechInnovate Solutions</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>As a small business owner, I was worried about finding affordable health coverage for my team. HealthPlus not only provided excellent options within our budget but also helped us understand how to maximize our benefits.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-details">
+                            <h4>David Martinez</h4>
+                            <p>Owner, Artisan Builders</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Our employees have been extremely satisfied with the coverage and service from HealthPlus. The wellness programs have been a particular hit, and we've seen improved morale and fewer sick days since implementing them.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-details">
+                            <h4>Jennifer Lee</h4>
+                            <p>CEO, Green Earth Organics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What are the requirements for offering group health insurance?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To qualify for group health insurance, your business typically needs to have at least two employees (including the owner in some cases). You'll need to contribute a minimum percentage toward employee premiums (usually at least 50%), and a minimum percentage of eligible employees must participate in the plan (typically 70%).</p>
+                        <p>Documentation requirements include your business tax ID, payroll records, and employee census data. Our team can guide you through the specific requirements based on your business size and location.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How much does group health insurance cost?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The cost of group health insurance varies based on several factors, including:</p>
+                        <ul>
+                            <li>Your location</li>
+                            <li>The size of your group</li>
+                            <li>The age and health profile of your employees</li>
+                            <li>The level of coverage you choose</li>
+                            <li>Your contribution strategy (how much you pay vs. how much employees pay)</li>
+                        </ul>
+                        <p>On average, employers can expect to pay anywhere from $300 to $600 per employee per month for comprehensive group coverage. We offer free, no-obligation quotes tailored to your specific business situation.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can we offer different plans to different employees?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you can offer different plans to different employee classes, provided these classifications are based on legitimate business categories such as:</p>
+                        <ul>
+                            <li>Full-time vs. part-time status</li>
+                            <li>Geographic location</li>
+                            <li>Job categories or departments</li>
+                            <li>Length of service (for new hires vs. established employees)</li>
+                        </ul>
+                        <p>However, you cannot discriminate based on health status or other protected characteristics. Our benefits consultants can help you design a multi-plan strategy that complies with all applicable regulations while meeting the diverse needs of your workforce.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What is the enrollment process like?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The enrollment process for HealthPlus Employer Plans is straightforward:</p>
+                        <ol>
+                            <li><strong>Consultation:</strong> We'll work with you to understand your needs and budget.</li>
+                            <li><strong>Plan Selection:</strong> We'll help you choose the right plan(s) for your business.</li>
+                            <li><strong>Employee Communication:</strong> We provide materials to explain benefits to your team.</li>
+                            <li><strong>Online Enrollment:</strong> Employees can enroll through our user-friendly portal.</li>
+                            <li><strong>Ongoing Support:</strong> We help manage changes throughout the year.</li>
+                        </ol>
+                        <p>The initial enrollment typically takes 2-4 weeks from application to coverage effective date. We also provide annual open enrollment support to help employees review and update their selections.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What tax benefits are available for offering health insurance?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Businesses can realize several tax advantages by offering group health insurance:</p>
+                        <ul>
+                            <li><strong>Tax-Deductible Premiums:</strong> Employer contributions to health insurance are typically 100% tax-deductible as a business expense.</li>
+                            <li><strong>FICA Tax Savings:</strong> Premiums paid by employers are exempt from federal payroll taxes, saving approximately 7.65% on those dollars.</li>
+                            <li><strong>Small Business Health Care Tax Credit:</strong> Eligible small businesses may qualify for a tax credit of up to 50% of premium costs.</li>
+                            <li><strong>Pre-Tax Employee Contributions:</strong> When employees pay their portion of premiums with pre-tax dollars, it reduces their taxable income and saves both the employee and employer on FICA taxes.</li>
+                        </ul>
+                        <p>We recommend consulting with your tax advisor to understand the specific tax implications for your business.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can we customize our plan with additional benefits?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! HealthPlus offers a wide range of supplemental benefits that can be added to your group health plan:</p>
+                        <ul>
+                            <li><strong>Dental and Vision Plans:</strong> Comprehensive coverage for oral and eye health.</li>
+                            <li><strong>Life and Disability Insurance:</strong> Financial protection for employees and their families.</li>
+                            <li><strong>Employee Assistance Programs (EAP):</strong> Mental health and counseling services.</li>
+                            <li><strong>Health Savings Accounts (HSAs) and Flexible Spending Accounts (FSAs):</strong> Tax-advantaged accounts for healthcare expenses.</li>
+                            <li><strong>Wellness Programs:</strong> Customized initiatives to improve employee health and reduce costs.</li>
+                        </ul>
+                        <p>These additional benefits can be offered on an employer-paid, shared-cost, or voluntary (employee-paid) basis, giving you flexibility in designing a comprehensive benefits package that fits your budget.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Provide Quality Health Coverage for Your Team?</h2>
+            <p>Join thousands of businesses that trust HealthPlus to provide comprehensive, affordable health insurance for their employees. Our benefits consultants are ready to help you design a plan that meets your needs and budget.</p>
+            <a href="contact.html" class="btn btn-primary">Request a Quote</a>
+            <a href="tel:1-800-555-HEALTH" class="btn btn-outline" style="margin-left: 15px;">Call 1-800-555-HEALTH</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>HealthPlus</h3>
+                    <p>Your trusted partner for health insurance coverage. We're committed to providing affordable healthcare options for individuals and families.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Plans</h3>
+                    <ul>
+                        <li><a href="plans-individual.html">Individual Plan</a></li>
+                        <li><a href="plans-family.html">Family Plan</a></li>
+                        <li><a href="plans-medicare.html">Medicare Plan</a></li>
+                        <li><a href="plans-employer.html">Employer Plan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="resources-doctors.html">Find a Doctor</a></li>
+                        <li><a href="#">Pharmacy Services</a></li>
+                        <li><a href="resources-wellness.html">Wellness Tips</a></li>
+                        <li><a href="#">Member Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 1-800-555-HEALTH</li>
+                        <li><i class="fas fa-envelope"></i> support@healthplus.demo</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Insurance Way, Healthcare City, HC 12345</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 HealthPlus Insurance. All rights reserved. This is a demo website.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // FAQ Accordion Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close all other FAQ items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current FAQ item
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
