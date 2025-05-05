@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refill Prescriptions - HealthPlus</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional styles for pharmacy pages */
+        .pharmacy-hero {
+            background-color: var(--bg-light);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .pharmacy-hero h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .pharmacy-hero p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .form-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--bg-medium);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--bg-medium);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1 0 200px;
+        }
+        
+        .add-prescription-btn {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 10px;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .add-prescription-btn i {
+            margin-right: 5px;
+        }
+        
+        .prescription-items {
+            margin-top: 20px;
+        }
+        
+        .prescription-item {
+            background-color: var(--bg-light);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .prescription-item .remove-btn {
+            color: var(--danger-color);
+            cursor: pointer;
+        }
+        
+        .cart-summary {
+            background-color: var(--bg-light);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+        }
+        
+        .cart-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .cart-total {
+            font-weight: 700;
+            padding-top: 10px;
+            margin-top: 10px;
+            border-top: 1px solid var(--bg-medium);
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .order-success {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .order-number {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Dropdown Menus -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>HealthPlus</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="plans.html" class="dropdown-toggle">Plans <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="plans-individual.html">Individual Plan</a>
+                            <a href="plans-family.html">Family Plan</a>
+                            <a href="plans-medicare.html">Medicare Plan</a>
+                            <a href="plans-employer.html">Employer Plan</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="pharmacy.html" class="dropdown-toggle">Pharmacy <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="refill-prescriptions.html">Refill Prescriptions</a>
+                            <a href="check-order-status.html">Check Order Status</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="resources.html" class="dropdown-toggle">Resources <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="resources-benefits.html">Understanding Benefits</a>
+                            <a href="resources-wellness.html">Wellness Tips</a>
+                            <a href="resources-doctors.html">Find a Doctor</a>
+                            <a href="resources-faq.html">FAQ</a>
+                        </div>
+                    </li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="buttons">
+                <a href="login.html" class="btn btn-outline">Sign In</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="pharmacy-hero">
+        <div class="container">
+            <h1>Refill Your Prescriptions</h1>
+            <p>Quickly and easily refill your prescriptions online. Enter your information below to get started.</p>
+        </div>
+    </section>
+    
+    <!-- Refill Form Section -->
+    <section class="container" style="padding: 60px 0;">
+        <div class="order-success">
+            <h3>Order Submitted Successfully!</h3>
+            <p>Your prescription refill order has been received and is being processed.</p>
+            <p>Order Number: <span class="order-number"></span></p>
+            <p>You will receive a confirmation email with details about your order.</p>
+        </div>
+        
+        <div class="form-container" id="refill-form">
+            <form id="prescription-form">
+                <!-- Personal Information -->
+                <div class="form-section">
+                    <h3>Personal Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name*</label>
+                            <input type="text" id="first-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name*</label>
+                            <input type="text" id="last-name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth*</label>
+                        <input type="date" id="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address*</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number*</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                </div>
+                
+                <!-- Prescription Information -->
+                <div class="form-section">
+                    <h3>Prescription Information</h3>
+                    <div class="form-group">
+                        <label for="prescription-number">Prescription Number*</label>
+                        <input type="text" id="prescription-number" placeholder="Enter your prescription number (e.g., RX1234567)" required>
+                    </div>
+                    <div class="add-prescription-btn" id="add-prescription">
+                        <i class="fas fa-plus-circle"></i> Add to Cart
+                    </div>
+                    
+                    <div class="prescription-items" id="prescription-items">
+                        <!-- Prescription items will be added here dynamically -->
+                    </div>
+                </div>
+                
+                <!-- Payment Information -->
+                <div class="form-section">
+                    <h3>Payment Information</h3>
+                    <div class="form-group">
+                        <label for="card-name">Name on Card*</label>
+                        <input type="text" id="card-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="card-number">Card Number*</label>
+                        <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="card-expiry">Expiration Date*</label>
+                            <input type="text" id="card-expiry" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-cvv">CVV*</label>
+                            <input type="text" id="card-cvv" placeholder="123" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Coupon Code -->
+                <div class="form-section">
+                    <h3>Discount</h3>
+                    <div class="form-group">
+                        <label for="coupon-code">RX Coupon Code (Optional)</label>
+                        <input type="text" id="coupon-code" placeholder="Enter coupon code if you have one">
+                    </div>
+                    <div class="add-prescription-btn" id="apply-coupon">
+                        <i class="fas fa-tag"></i> Apply Coupon
+                    </div>
+                </div>
+                
+                <!-- Order Summary -->
+                <div class="form-section">
+                    <h3>Order Summary</h3>
+                    <div class="cart-summary">
+                        <div class="cart-row">
+                            <span>Prescription Items:</span>
+                            <span id="items-count">0</span>
+                        </div>
+                        <div class="cart-row">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="cart-row">
+                            <span>Discount:</span>
+                            <span id="discount">$0.00</span>
+                        </div>
+                        <div class="cart-row cart-total">
+                            <span>Total:</span>
+                            <span id="total">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="actions">
+                    <button type="button" class="btn btn-outline" id="cancel-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submit-btn">Submit Order</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>HealthPlus</h3>
+                    <p>Your trusted partner for health insurance coverage. We're committed to providing affordable healthcare options for individuals and families.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Plans</h3>
+                    <ul>
+                        <li><a href="plans-individual.html">Individual Plan</a></li>
+                        <li><a href="plans-family.html">Family Plan</a></li>
+                        <li><a href="plans-medicare.html">Medicare Plan</a></li>
+                        <li><a href="plans-employer.html">Employer Plan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="resources-doctors.html">Find a Doctor</a></li>
+                        <li><a href="#">Pharmacy Services</a></li>
+                        <li><a href="resources-wellness.html">Wellness Tips</a></li>
+                        <li><a href="#">Member Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 1-800-555-HEALTH</li>
+                        <li><i class="fas fa-envelope"></i> support@healthplus.demo</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Insurance Way, Healthcare City, HC 12345</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 HealthPlus Insurance. All rights reserved. This is a demo website.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Variables
+            let prescriptions = [];
+            let subtotal = 0;
+            let discount = 0;
+            let total = 0;
+            
+            // Get DOM elements
+            const addPrescriptionBtn = document.getElementById('add-prescription');
+            const prescriptionItems = document.getElementById('prescription-items');
+            const prescriptionNumber = document.getElementById('prescription-number');
+            const itemsCount = document.getElementById('items-count');
+            const subtotalEl = document.getElementById('subtotal');
+            const discountEl = document.getElementById('discount');
+            const totalEl = document.getElementById('total');
+            const applyCouponBtn = document.getElementById('apply-coupon');
+            const couponCode = document.getElementById('coupon-code');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const submitBtn = document.getElementById('submit-btn');
+            const orderSuccess = document.querySelector('.order-success');
+            const orderNumber = document.querySelector('.order-number');
+            const refillForm = document.getElementById('refill-form');
+            
+            // Add prescription to cart
+            addPrescriptionBtn.addEventListener('click', function() {
+                const rxNumber = prescriptionNumber.value.trim();
+                
+                if(rxNumber) {
+                    // Generate random price for demo purposes
+                    const price = (Math.random() * 50 + 10).toFixed(2);
+                    
+                    // Create prescription object
+                    const prescription = {
+                        id: Date.now(),
+                        number: rxNumber,
+                        price: parseFloat(price)
+                    };
+                    
+                    // Add to prescriptions array
+                    prescriptions.push(prescription);
+                    
+                    // Create UI element
+                    const item = document.createElement('div');
+                    item.classList.add('prescription-item');
+                    item.dataset.id = prescription.id;
+                    item.innerHTML = `
+                        <div>Prescription #${prescription.number}</div>
+                        <div>$${prescription.price.toFixed(2)}</div>
+                        <div class="remove-btn"><i class="fas fa-times"></i></div>
+                    `;
+                    
+                    // Add to DOM
+                    prescriptionItems.appendChild(item);
+                    
+                    // Clear input
+                    prescriptionNumber.value = '';
+                    
+                    // Update cart summary
+                    updateCartSummary();
+                    
+                    // Add remove event listener
+                    item.querySelector('.remove-btn').addEventListener('click', function() {
+                        removePrescription(prescription.id);
+                    });
+                }
+            });
+            
+            // Apply coupon
+            applyCouponBtn.addEventListener('click', function() {
+                const code = couponCode.value.trim().toUpperCase();
+                
+                if(code) {
+                    // Simple coupon validation for demo
+                    if(code === 'RX10') {
+                        discount = subtotal * 0.1; // 10% discount
+                        alert('Coupon applied successfully! 10% discount applied.');
+                    } else if(code === 'RX20') {
+                        discount = subtotal * 0.2; // 20% discount
+                        alert('Coupon applied successfully! 20% discount applied.');
+                    } else if(code === 'RX30') {
+                        discount = subtotal * 0.3; // 30% discount
+                        alert('Coupon applied successfully! 30% discount applied.');
+                    } else {
+                        alert('Invalid coupon code. Please try again.');
+                        discount = 0;
+                    }
+                    
+                    updateCartSummary();
+                }
+            });
+            
+            // Remove prescription
+            function removePrescription(id) {
+                // Remove from array
+                prescriptions = prescriptions.filter(p => p.id !== id);
+                
+                // Remove from DOM
+                const item = document.querySelector(`.prescription-item[data-id="${id}"]`);
+                if(item) {
+                    item.remove();
+                }
+                
+                // Update cart summary
+                updateCartSummary();
+            }
+            
+            // Update cart summary
+            function updateCartSummary() {
+                // Calculate subtotal
+                subtotal = prescriptions.reduce((sum, p) => sum + p.price, 0);
+                
+                // Calculate total
+                total = subtotal - discount;
+                
+                // Update UI
+                itemsCount.textContent = prescriptions.length;
+                subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+                discountEl.textContent = `$${discount.toFixed(2)}`;
+                totalEl.textContent = `$${total.toFixed(2)}`;
+            }
+            
+            // Cancel order
+            cancelBtn.addEventListener('click', function() {
+                if(confirm('Are you sure you want to cancel your order?')) {
+                    resetForm();
+                }
+            });
+            
+            // Submit order
+            document.getElementById('prescription-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if(prescriptions.length === 0) {
+                    alert('Please add at least one prescription to your cart.');
+                    return;
+                }
+                
+                // Generate random order number
+                const orderNum = 'RX' + Math.floor(Math.random() * 10000000);
+                
+                // Display success message
+                orderNumber.textContent = orderNum;
+                orderSuccess.style.display = 'block';
+                refillForm.style.display = 'none';
+                
+                // Reset form for next order
+                resetForm();
+                
+                // Scroll to top to see success message
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Reset form
+            function resetForm() {
+                // Clear prescriptions
+                prescriptions = [];
+                prescriptionItems.innerHTML = '';
+                
+                // Reset values
+                subtotal = 0;
+                discount = 0;
+                total = 0;
+                
+                // Update UI
+                updateCartSummary();
+                
+                // Reset form fields
+                document.getElementById('prescription-form').reset();
+            }
+        });
+    </script>
+</body>
+</html>
