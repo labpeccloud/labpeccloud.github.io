@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Order Status - HealthPlus</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional styles for pharmacy pages */
+        .pharmacy-hero {
+            background-color: var(--bg-light);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .pharmacy-hero h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .pharmacy-hero p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+        
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .form-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--bg-medium);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--bg-medium);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .order-result {
+            max-width: 600px;
+            margin: 40px auto 0;
+            padding: 30px;
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            display: none;
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--bg-medium);
+        }
+        
+        .order-number {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .order-date {
+            color: var(--text-light);
+        }
+        
+        .order-details {
+            margin-bottom: 20px;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .detail-label {
+            width: 150px;
+            font-weight: 500;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .status-pending {
+            background-color: #fff8e6;
+            color: #ffc107;
+        }
+        
+        .status-processing {
+            background-color: #e3f2fd;
+            color: #2196f3;
+        }
+        
+        .status-delayed {
+            background-color: #fff1f0;
+            color: #ff5252;
+        }
+        
+        .status-fulfilled {
+            background-color: #e8f5e9;
+            color: #4caf50;
+        }
+        
+        .status-cancelled {
+            background-color: #f5f5f5;
+            color: #757575;
+        }
+        
+        .order-items {
+            background-color: var(--bg-light);
+            padding: 15px;
+            border-radius: var(--border-radius);
+        }
+        
+        .item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--bg-medium);
+        }
+        
+        .item:last-child {
+            border-bottom: none;
+        }
+        
+        .item-details {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .error-message {
+            background-color: #fff1f0;
+            color: #ff5252;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Dropdown Menus -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>HealthPlus</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="plans.html" class="dropdown-toggle">Plans <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="plans-individual.html">Individual Plan</a>
+                            <a href="plans-family.html">Family Plan</a>
+                            <a href="plans-medicare.html">Medicare Plan</a>
+                            <a href="plans-employer.html">Employer Plan</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="pharmacy.html" class="dropdown-toggle">Pharmacy <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="refill-prescriptions.html">Refill Prescriptions</a>
+                            <a href="check-order-status.html">Check Order Status</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="resources.html" class="dropdown-toggle">Resources <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="resources-benefits.html">Understanding Benefits</a>
+                            <a href="resources-wellness.html">Wellness Tips</a>
+                            <a href="resources-doctors.html">Find a Doctor</a>
+                            <a href="resources-faq.html">FAQ</a>
+                        </div>
+                    </li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="buttons">
+                <a href="login.html" class="btn btn-outline">Sign In</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="pharmacy-hero">
+        <div class="container">
+            <h1>Check Prescription Order Status</h1>
+            <p>Track the status of your prescription order by entering your order information below.</p>
+        </div>
+    </section>
+    
+    <!-- Order Status Form Section -->
+    <section class="container" style="padding: 60px 0;">
+        <div class="form-container">
+            <form id="order-status-form">
+                <div class="form-section">
+                    <h3>Enter Order Information</h3>
+                    <div class="form-group">
+                        <label for="order-number">Order Number*</label>
+                        <input type="text" id="order-number" placeholder="Enter your order number (e.g., RX1234567)" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth*</label>
+                        <input type="date" id="dob" required>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-message">
+                    <i class="fas fa-exclamation-circle"></i> We couldn't find an order matching that information. Please double-check your order number and date of birth.
+                </div>
+                
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">Check Status</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Order Result (Hidden initially) -->
+        <div class="order-result" id="order-result">
+            <div class="order-header">
+                <div class="order-number" id="result-order-number">Order #RX5678901</div>
+                <div class="order-date" id="result-order-date">Ordered on May 2, 2025</div>
+            </div>
+            
+            <div class="order-details">
+                <div class="detail-row">
+                    <div class="detail-label">Status:</div>
+                    <div id="result-status"><span class="status-badge status-pending">Pending</span></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Estimated Delivery:</div>
+                    <div id="result-delivery">May 8, 2025</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Delivery Method:</div>
+                    <div id="result-method">Standard Shipping</div>
+                </div>
+            </div>
+            
+            <div class="order-items">
+                <h3>Order Items</h3>
+                <div id="result-items">
+                    <!-- Items will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>HealthPlus</h3>
+                    <p>Your trusted partner for health insurance coverage. We're committed to providing affordable healthcare options for individuals and families.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Plans</h3>
+                    <ul>
+                        <li><a href="plans-individual.html">Individual Plan</a></li>
+                        <li><a href="plans-family.html">Family Plan</a></li>
+                        <li><a href="plans-medicare.html">Medicare Plan</a></li>
+                        <li><a href="plans-employer.html">Employer Plan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="resources-doctors.html">Find a Doctor</a></li>
+                        <li><a href="#">Pharmacy Services</a></li>
+                        <li><a href="resources-wellness.html">Wellness Tips</a></li>
+                        <li><a href="#">Member Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 1-800-555-HEALTH</li>
+                        <li><i class="fas fa-envelope"></i> support@healthplus.demo</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Insurance Way, Healthcare City, HC 12345</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 HealthPlus Insurance. All rights reserved. This is a demo website.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Test data - Sample orders for demonstration
+            const testOrders = [
+                {
+                    orderNumber: 'RX1234567',
+                    date: 'May 1, 2025',
+                    status: 'pending',
+                    statusText: 'Pending',
+                    delivery: 'May 7, 2025',
+                    method: 'Standard Shipping',
+                    items: [
+                        { name: 'Lisinopril 10mg', quantity: 30, price: 15.99 },
+                        { name: 'Metformin 500mg', quantity: 60, price: 12.50 }
+                    ]
+                },
+                {
+                    orderNumber: 'RX2345678',
+                    date: 'April 28, 2025',
+                    status: 'processing',
+                    statusText: 'Processing',
+                    delivery: 'May 5, 2025',
+                    method: 'Express Shipping',
+                    items: [
+                        { name: 'Atorvastatin 20mg', quantity: 90, price: 24.99 }
+                    ]
+                },
+                {
+                    orderNumber: 'RX3456789',
+                    date: 'April 25, 2025',
+                    status: 'delayed',
+                    statusText: 'Delayed',
+                    delivery: 'May 10, 2025',
+                    method: 'Standard Shipping',
+                    items: [
+                        { name: 'Levothyroxine 50mcg', quantity: 30, price: 18.75 },
+                        { name: 'Omeprazole 20mg', quantity: 30, price: 14.50 },
+                        { name: 'Albuterol Inhaler', quantity: 1, price: 45.00 }
+                    ]
+                },
+                {
+                    orderNumber: 'RX4567890',
+                    date: 'April 22, 2025',
+                    status: 'fulfilled',
+                    statusText: 'Fulfilled',
+                    delivery: 'April 29, 2025',
+                    method: 'Express Shipping',
+                    items: [
+                        { name: 'Amoxicillin 500mg', quantity: 20, price: 12.99 }
+                    ]
+                },
+                {
+                    orderNumber: 'RX5678901',
+                    date: 'April 20, 2025',
+                    status: 'cancelled',
+                    statusText: 'Cancelled',
+                    delivery: 'N/A',
+                    method: 'Standard Shipping',
+                    items: [
+                        { name: 'Sertraline 50mg', quantity: 30, price: 16.50 },
+                        { name: 'Ibuprofen 800mg', quantity: 30, price: 8.99 }
+                    ]
+                }
+            ];
+            
+            // Get DOM elements
+            const orderStatusForm = document.getElementById('order-status-form');
+            const orderNumberInput = document.getElementById('order-number');
+            const orderResult = document.getElementById('order-result');
+            const errorMessage = document.getElementById('error-message');
+            
+            // Result elements
+            const resultOrderNumber = document.getElementById('result-order-number');
+            const resultOrderDate = document.getElementById('result-order-date');
+            const resultStatus = document.getElementById('result-status');
+            const resultDelivery = document.getElementById('result-delivery');
+            const resultMethod = document.getElementById('result-method');
+            const resultItems = document.getElementById('result-items');
+            
+            // Form submission
+            orderStatusForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const orderNumber = orderNumberInput.value.trim();
+                
+                // Find the order in test data
+                const order = testOrders.find(o => o.orderNumber.toLowerCase() === orderNumber.toLowerCase());
+                
+                if (order) {
+                    // Show order result
+                    displayOrderResult(order);
+                    orderResult.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                } else {
+                    // Show error message
+                    orderResult.style.display = 'none';
+                    errorMessage.style.display = 'block';
+                }
+            });
+            
+            // Display order result
+            function displayOrderResult(order) {
+                // Update basic info
+                resultOrderNumber.textContent = `Order #${order.orderNumber}`;
+                resultOrderDate.textContent = `Ordered on ${order.date}`;
+                
+                // Update status with appropriate styling
+                let statusHTML = `<span class="status-badge status-${order.status}">${order.statusText}</span>`;
+                resultStatus.innerHTML = statusHTML;
+                
+                // Update delivery and method
+                resultDelivery.textContent = order.delivery;
+                resultMethod.textContent = order.method;
+                
+                // Update items
+                resultItems.innerHTML = '';
+                order.items.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('item');
+                    
+                    const details = document.createElement('div');
+                    details.classList.add('item-details');
+                    
+                    const nameQuantity = document.createElement('div');
+                    nameQuantity.textContent = `${item.name} (Qty: ${item.quantity})`;
+                    
+                    const price = document.createElement('div');
+                    price.textContent = `${item.price.toFixed(2)}`;
+                    
+                    details.appendChild(nameQuantity);
+                    details.appendChild(price);
+                    itemElement.appendChild(details);
+                    
+                    resultItems.appendChild(itemElement);
+                });
+                
+                // Scroll to result
+                setTimeout(() => {
+                    orderResult.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        });
+    </script>
+</body>
+</html>
