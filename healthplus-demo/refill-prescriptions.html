@@ -506,9 +506,29 @@
                 totalEl.textContent = `$${total.toFixed(2)}`;
             }
             
-            // Cancel order
+            // Cancel order - MODIFIED TO ADD GENESYS EVENT TRACKING
             cancelBtn.addEventListener('click', function() {
                 if(confirm('Are you sure you want to cancel your order?')) {
+                    // Track the cancellation event with Genesys
+                    if (window.Genesys && window.Genesys.command) {
+                        window.Genesys.command('Journey.trackEvent', {
+                            eventName: 'prescription_refill_cancelled',
+                            customAttributes: {
+                                actionType: 'cancel_refill',
+                                pageSection: 'refill-form',
+                                userIntent: 'abandonment',
+                                itemCount: prescriptions.length,
+                                cartValue: subtotal.toFixed(2),
+                                timestamp: new Date().toISOString()
+                            }
+                        }).then(function() {
+                            console.log('Prescription cancellation event tracked successfully');
+                        }).catch(function(error) {
+                            console.error('Error tracking prescription cancellation event:', error);
+                        });
+                    }
+                    
+                    // Reset the form
                     resetForm();
                 }
             });
