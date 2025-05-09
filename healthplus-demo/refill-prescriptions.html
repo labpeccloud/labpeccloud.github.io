@@ -508,30 +508,69 @@
             
             // Cancel order - MODIFIED TO ADD GENESYS EVENT TRACKING
             cancelBtn.addEventListener('click', function() {
-                if(confirm('Are you sure you want to cancel your order?')) {
-                    // Track the cancellation event with Genesys
-                    if (window.Genesys && window.Genesys.command) {
-                        window.Genesys.command('Journey.trackEvent', {
-                            eventName: 'prescription_refill_cancelled',
-                            customAttributes: {
-                                actionType: 'cancel_refill',
-                                pageSection: 'refill-form',
-                                userIntent: 'abandonment',
-                                itemCount: prescriptions.length,
-                                cartValue: subtotal.toFixed(2),
-                                timestamp: new Date().toISOString()
-                            }
-                        }).then(function() {
-                            console.log('Prescription cancellation event tracked successfully');
-                        }).catch(function(error) {
-                            console.error('Error tracking prescription cancellation event:', error);
-                        });
+    if(confirm('Are you sure you want to cancel your order?')) {
+        console.log('Order cancellation confirmed');
+        
+        // Set a flag to track if we've handled the form reset
+        let formResetHandled = false;
+        
+        // Set a timeout to ensure the UI stays responsive
+        setTimeout(function() {
+            if (!formResetHandled) {
+                console.log('Genesys event tracking timed out, proceeding with form reset');
+                resetForm();
+                formResetHandled = true;
+            }
+        }, 500); // Wait only 500ms before proceeding anyway
+        
+        // Try to track the event with Genesys
+        try {
+            if (typeof window.Genesys !== 'undefined' && typeof window.Genesys.command === 'function') {
+                console.log('Attempting to track cancellation event');
+                
+                // Use Promise.race with timeout to prevent hanging
+                Promise.race([
+                    window.Genesys.command('Journey.trackEvent', {
+                        eventName: 'prescription_refill_cancelled',
+                        customAttributes: {
+                            actionType: 'cancel_refill',
+                            pageSection: 'refill-form',
+                            itemCount: prescriptions.length,
+                            cartValue: subtotal.toFixed(2)
+                        }
+                    }),
+                    new Promise((_, reject) => setTimeout(() => reject(new Error('Genesys timeout')), 400))
+                ])
+                .then(function() {
+                    console.log('Cancellation event tracked successfully');
+                    if (!formResetHandled) {
+                        resetForm();
+                        formResetHandled = true;
                     }
-                    
-                    // Reset the form
+                })
+                .catch(function(error) {
+                    console.error('Error tracking cancellation event:', error);
+                    if (!formResetHandled) {
+                        resetForm();
+                        formResetHandled = true;
+                    }
+                });
+            } else {
+                console.warn('Genesys SDK not available, skipping event tracking');
+                if (!formResetHandled) {
                     resetForm();
+                    formResetHandled = true;
                 }
-            });
+            }
+        } catch (e) {
+            console.error('Exception in Genesys tracking:', e);
+            if (!formResetHandled) {
+                resetForm();
+                formResetHandled = true;
+            }
+        }
+    }
+});
             
             // Submit order
             document.getElementById('prescription-form').addEventListener('submit', function(e) {
