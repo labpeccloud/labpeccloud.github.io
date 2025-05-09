@@ -563,25 +563,110 @@
                 totalEl.textContent = `$${total.toFixed(2)}`;
             }
             
-            // Cancel order
+/**
+ * Alternative approach for tracking prescription cancellation events
+ * that doesn't depend on the Genesys Journey plugin directly.
+ */
+
+// Add to your cancel button event handler
 cancelBtn.addEventListener('click', function() {
-    console.log('Cancel button clicked');
     if(confirm('Are you sure you want to cancel your order?')) {
-        // Track the event without blocking the UI
+        console.log('Order cancellation confirmed');
+        
+        // Track the cancellation using our alternative approach
+        trackPrescriptionCancellation({
+            itemCount: prescriptions.length,
+            cartValue: subtotal.toFixed(2)
+        });
+        
+        // Reset the form immediately
+        resetForm();
+    }
+});
+
+/**
+ * Function to track prescription cancellation events using multiple methods
+ * to ensure at least one works.
+ */
+function trackPrescriptionCancellation(data) {
+    console.log('Tracking prescription cancellation:', data);
+    
+    // Method 1: Try using our HealthPlus Genesys integration
+    try {
         if (window.HealthPlus && window.HealthPlus.Genesys) {
             window.HealthPlus.Genesys.trackEvent('prescription_refill_cancelled', {
                 actionType: 'cancel_refill',
                 pageSection: 'refill-form',
                 userIntent: 'abandonment',
-                itemCount: prescriptions.length,
-                cartValue: subtotal.toFixed(2)
+                itemCount: data.itemCount,
+                cartValue: data.cartValue,
+                timestamp: new Date().toISOString()
             });
         }
-        
-        // Always reset the form immediately to keep UI responsive
-        resetForm();
+    } catch (e) {
+        console.error('Method 1 (HealthPlus.Genesys) failed:', e);
     }
-});
+    
+    // Method 2: Try using direct Genesys object if available
+    try {
+        if (typeof window.Genesys === 'function') {
+            // The Genesys function can be called directly to queue commands
+            window.Genesys('command', 'Journey.trackEvent', {
+                eventName: 'prescription_refill_cancelled',
+                customAttributes: {
+                    actionType: 'cancel_refill',
+                    pageSection: 'refill-form',
+                    userIntent: 'abandonment',
+                    itemCount: data.itemCount,
+                    cartValue: data.cartValue,
+                    timestamp: new Date().toISOString()
+                }
+            });
+            console.log('Method 2 (direct Genesys call) completed');
+        }
+    } catch (e) {
+        console.error('Method 2 (direct Genesys call) failed:', e);
+    }
+    
+    // Method 3: Add a data attribute to the page for WebMessenger to pick up
+    // This assumes Predictive Engagement is enabled and looking for on-page signals
+    try {
+        // Create a hidden element with data attributes
+        const eventElement = document.createElement('div');
+        eventElement.style.display = 'none';
+        eventElement.setAttribute('data-predictive-event', 'prescription_refill_cancelled');
+        eventElement.setAttribute('data-predictive-cart-value', data.cartValue);
+        eventElement.setAttribute('data-predictive-item-count', data.itemCount);
+        
+        // Append to the page briefly, then remove
+        document.body.appendChild(eventElement);
+        setTimeout(() => {
+            document.body.removeChild(eventElement);
+        }, 1000);
+        
+        console.log('Method 3 (data attributes) completed');
+    } catch (e) {
+        console.error('Method 3 (data attributes) failed:', e);
+    }
+    
+    // Method 4: Use HTML5 custom event as a fallback
+    try {
+        const event = new CustomEvent('HealthPlusCancellation', {
+            detail: {
+                actionType: 'cancel_refill',
+                itemCount: data.itemCount,
+                cartValue: data.cartValue,
+                timestamp: new Date().toISOString()
+            },
+            bubbles: true
+        });
+        
+        document.dispatchEvent(event);
+        console.log('Method 4 (custom event) completed');
+    } catch (e) {
+        console.error('Method 4 (custom event) failed:', e);
+    }
+}
             
             // Submit order
             document.getElementById('prescription-form').addEventListener('submit', function(e) {
