@@ -382,36 +382,11 @@
             </div>
         </div>
     </footer>
-
+    <script src="js/genesys-integration.js"></script>
     <script src="js/main.js"></script>
     <script>
 
-        // Add this at the top of your script section
-    let genesysReady = false;
-    
-    // Function to initialize Genesys
-    function initializeGenesys() {
-        console.log('Attempting to initialize Genesys...');
-        
-        // Check if Genesys is already available
-        if (typeof window.Genesys !== 'undefined' && typeof window.Genesys.command === 'function') {
-            console.log('Genesys SDK found, attempting to register Journey plugin...');
-            
-            // Try to register the Journey plugin
-            window.Genesys.command('Journey.register')
-                .then(function() {
-                    console.log('✅ Journey plugin registered successfully');
-                    genesysReady = true;
-                })
-                .catch(function(error) {
-                    console.error('❌ Error registering Journey plugin:', error);
-                });
-        } else {
-            console.log('Genesys SDK not found, will retry in 1 second...');
-            // Retry after a delay
-            setTimeout(initializeGenesys, 1000);
-        }
-    }
+   
         
         document.addEventListener('DOMContentLoaded', function() {
             // Variables
@@ -534,45 +509,23 @@
                 totalEl.textContent = `$${total.toFixed(2)}`;
             }
             
-            // Cancel order - MODIFIED TO ADD GENESYS EVENT TRACKING
-            cancelBtn.addEventListener('click', function() {
+            // Cancel order
+cancelBtn.addEventListener('click', function() {
     console.log('Cancel button clicked');
-    
     if(confirm('Are you sure you want to cancel your order?')) {
-        console.log('Order cancellation confirmed');
+        // Track the event without blocking the UI
+        if (window.HealthPlus && window.HealthPlus.Genesys) {
+            window.HealthPlus.Genesys.trackEvent('prescription_refill_cancelled', {
+                actionType: 'cancel_refill',
+                pageSection: 'refill-form',
+                userIntent: 'abandonment',
+                itemCount: prescriptions.length,
+                cartValue: subtotal.toFixed(2)
+            });
+        }
         
         // Always reset the form immediately to keep UI responsive
         resetForm();
-        
-        // Try to track the event with Genesys if it's ready
-        if (genesysReady) {
-            console.log('Tracking cancellation event with Genesys');
-            
-            // Use a setTimeout to make this non-blocking
-            setTimeout(function() {
-                try {
-                    window.Genesys.command('Journey.trackEvent', {
-                        eventName: 'prescription_refill_cancelled',
-                        customAttributes: {
-                            actionType: 'cancel_refill',
-                            pageSection: 'refill-form',
-                            userIntent: 'abandonment',
-                            timestamp: new Date().toISOString()
-                        }
-                    })
-                    .then(function() {
-                        console.log('✅ Cancellation event tracked successfully');
-                    })
-                    .catch(function(error) {
-                        console.error('❌ Error tracking cancellation event:', error);
-                    });
-                } catch (e) {
-                    console.error('Exception when tracking event:', e);
-                }
-            }, 0);
-        } else {
-            console.warn('⚠️ Genesys not ready, unable to track cancellation event');
-        }
     }
 });
             
