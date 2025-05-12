@@ -611,7 +611,7 @@ function trackPrescriptionCancellation(data) {
     try {
         if (typeof window.Genesys === 'function') {
             // The Genesys function can be called directly to queue commands
-            window.Genesys('command', 'Journey.trackEvent', {
+            window.Genesys('command', 'Journey.record', {
                 eventName: 'prescription_refill_cancelled',
                 customAttributes: {
                     actionType: 'cancel_refill',
