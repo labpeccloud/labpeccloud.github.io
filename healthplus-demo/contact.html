@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <script type="text/javascript" charset="utf-8">
-  (function (g, e, n, es, ys) {
-    g['_genesysJs'] = e;
-    g[e] = g[e] || function () {
-      (g[e].q = g[e].q || []).push(arguments)
-    };
-    g[e].t = 1 * new Date();
-    g[e].c = es;
-    ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
-  })(window, 'Genesys', 'https://apps.usw2.pure.cloud/genesys-bootstrap/genesys.min.js', {
-    environment: 'prod-usw2',
-    deploymentId: '789f44bf-f15e-4ba0-a257-baec7186237e',
-      debug: true
-  });
-</script>
+    <script type="text/javascript" charset="utf-8">
+    (function (g, e, n, es, ys) {
+        g['_genesysJs'] = e;
+        g[e] = g[e] || function () {
+            (g[e].q = g[e].q || []).push(arguments)
+        };
+        g[e].t = 1 * new Date();
+        g[e].c = es;
+        ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
+    })(window, 'Genesys', 'https://apps.usw2.pure.cloud/genesys-bootstrap/genesys.min.js', {
+        environment: 'prod-usw2',
+        deploymentId: '789f44bf-f15e-4ba0-a257-baec7186237e',
+        debug: true
+    });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Form</title>
@@ -74,7 +74,7 @@
 </head>
 <body>
     <div class="contact-form">
-        <form id="contactForm" onsubmit="return validateForm()">
+        <form id="contactForm">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
@@ -103,10 +103,37 @@
     </div>
 
     <script>
-        function validateForm() {
+        // Initialize Genesys form tracking
+        function initGenesysTracking() {
+            try {
+                Genesys("command", "Journey.formsTrack", {
+                    selector: "#contactForm",
+                    formName: "Contact Form",
+                    captureFormDataOnAbandon: true,
+                    customAttributes: { 
+                        source: "Website Contact Form",
+                        isVip: false 
+                    },
+                    traitsMapper: [
+                        { fieldName: "name", traitName: "givenName" },
+                        { fieldName: "email", traitName: "email" },
+                        { fieldName: "company", traitName: "company" },
+                        { fieldName: "message", traitName: "userMessage" }
+                    ]
+                });
+            } catch (error) {
+                console.error("Genesys tracking initialization error:", error);
+            }
+        }
+
+        // Modified form validation and submission
+        function validateForm(event) {
+            event.preventDefault();
+            
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const message = document.getElementById('message').value.trim();
+            const company = document.getElementById('company').value.trim();
 
             if (name === '' || email === '' || message === '') {
                 alert('Please fill in all required fields.');
@@ -120,13 +147,44 @@
                 return false;
             }
 
+            // Trigger Genesys form submission tracking
+            try {
+                Genesys("command", "Journey.formSubmitted", {
+                    formName: "Contact Form",
+                    formData: {
+                        name: name,
+                        email: email,
+                        company: company,
+                        message: message
+                    },
+                    customAttributes: {
+                        source: "Website Contact Form",
+                        messageLength: message.length,
+                        messageContent: message // Capturing the full message text
+                    }
+                });
+            } catch (error) {
+                console.error("Genesys form submission tracking error:", error);
+            }
+
             alert('Form submitted successfully!');
+            resetForm();
             return true;
         }
 
         function resetForm() {
             document.getElementById('contactForm').reset();
         }
+
+        // Add event listeners when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Genesys tracking
+            initGenesysTracking();
+
+            // Attach form submission event listener
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', validateForm);
+        });
     </script>
 </body>
 </html>
