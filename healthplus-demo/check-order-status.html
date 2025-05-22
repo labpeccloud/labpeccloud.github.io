@@ -512,7 +512,9 @@
                         order_date: order.date,
                         estimated_delivery: order.delivery,
                         delivery_method: order.method,
-                        item_count: order.items.length
+                        item_count: order.items.length,
+                         page_url: window.location.href,
+                       browser_language: navigator.language
     }
   }
 });
