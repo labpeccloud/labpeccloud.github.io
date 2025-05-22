@@ -504,6 +504,18 @@
                     },
                     traitsMapper: []
                 });
+
+               Genesys("command", "Database.set", {
+  messaging: {
+    customAttributes: {
+      order_number: order.orderNumber,
+                        order_date: order.date,
+                        estimated_delivery: order.delivery,
+                        delivery_method: order.method,
+                        item_count: order.items.length
+    }
+  }
+});
                 
                 console.log(`Genesys event 'order_delayed' sent for order ${order.orderNumber}`);
             }
