@@ -492,11 +492,9 @@
                                     prescription_cart: cartJson
                                 }
                             }
-                        }).then(function(result) {
-                            console.log('✅ Successfully updated prescription_cart attribute:', result);
-                        }).catch(function(error) {
-                            console.error('❌ Failed to update prescription_cart attribute:', error);
                         });
+                        
+                        console.log('✅ Prescription cart update command sent to Genesys');
                     } else {
                         console.warn('⚠️ Genesys is not available for database operations');
                     }
@@ -685,11 +683,9 @@
                                     prescription_cart: JSON.stringify(cancellationData)
                                 }
                             }
-                        }).then(function(result) {
-                            console.log('✅ Prescription cart cleared due to cancellation:', result);
-                        }).catch(function(error) {
-                            console.error('❌ Error tracking cancellation:', error);
                         });
+                        
+                        console.log('✅ Prescription cart cancellation command sent to Genesys');
                     }
                 } catch (error) {
                     console.error('❌ Error tracking cancellation:', error);
@@ -732,11 +728,9 @@
                                     prescription_cart: JSON.stringify(completedOrderData)
                                 }
                             }
-                        }).then(function(result) {
-                            console.log('✅ Order completed and recorded in Genesys:', result);
-                        }).catch(function(error) {
-                            console.error('❌ Error recording order completion:', error);
                         });
+                        
+                        console.log('✅ Order completion command sent to Genesys');
                     }
                 } catch (error) {
                     console.error('❌ Error recording order completion:', error);
