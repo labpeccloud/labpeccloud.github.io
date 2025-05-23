@@ -680,7 +680,8 @@
                         window.Genesys('command', 'Database.set', {
                             messaging: {
                                 customAttributes: {
-                                    prescription_cart: JSON.stringify(cancellationData)
+                                    prescription_cart: JSON.stringify(cancellationData),
+                                    page_url: window.location.href
                                 }
                             }
                         });
@@ -725,7 +726,8 @@
                         window.Genesys('command', 'Database.set', {
                             messaging: {
                                 customAttributes: {
-                                    prescription_cart: JSON.stringify(completedOrderData)
+                                    prescription_cart: JSON.stringify(completedOrderData),
+                                    page_url: window.location.href
                                 }
                             }
                         });
