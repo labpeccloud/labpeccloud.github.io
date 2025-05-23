@@ -478,15 +478,20 @@
                     lastUpdated: new Date().toISOString()
                 };
                 
+                // Convert to JSON string for the custom attribute value
+                const cartJson = JSON.stringify(cartData);
+                
                 console.log('Updating prescription_cart attribute:', cartData);
                 
                 try {
-                    // Use Genesys database plugin to set the custom attribute
-                    // Pass cartData as an object, not a JSON string
+                    // Use Genesys database plugin with the correct messaging format
                     if (typeof window.Genesys === 'function') {
                         window.Genesys('command', 'Database.set', {
-                            name: 'prescription_cart',
-                            value: cartData
+                            messaging: {
+                                customAttributes: {
+                                    prescription_cart: cartJson
+                                }
+                            }
                         }, function(result) {
                             if (result && result.success) {
                                 console.log('✅ Successfully updated prescription_cart attribute');
@@ -677,8 +682,11 @@
                         };
                         
                         window.Genesys('command', 'Database.set', {
-                            name: 'prescription_cart',
-                            value: cancellationData
+                            messaging: {
+                                customAttributes: {
+                                    prescription_cart: JSON.stringify(cancellationData)
+                                }
+                            }
                         });
                         
                         console.log('✅ Prescription cart cleared due to cancellation');
@@ -719,8 +727,11 @@
                         };
                         
                         window.Genesys('command', 'Database.set', {
-                            name: 'prescription_cart',
-                            value: completedOrderData
+                            messaging: {
+                                customAttributes: {
+                                    prescription_cart: JSON.stringify(completedOrderData)
+                                }
+                            }
                         });
                         
                         console.log('✅ Order completed and recorded in Genesys');
