@@ -489,7 +489,8 @@
                         window.Genesys('command', 'Database.set', {
                             messaging: {
                                 customAttributes: {
-                                    prescription_cart: cartJson
+                                    prescription_cart: cartJson,
+                                    page_url: window.location.href
                                 }
                             }
                         });
