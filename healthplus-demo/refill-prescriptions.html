@@ -439,15 +439,13 @@
     <script src="js/genesys-integration.js"></script>
     <script src="js/main.js"></script>
     <script>
-
-   
-        
         document.addEventListener('DOMContentLoaded', function() {
             // Variables
             let prescriptions = [];
             let subtotal = 0;
             let discount = 0;
             let total = 0;
+            let idleTrackingEnabled = false;
             
             // Get DOM elements
             const addPrescriptionBtn = document.getElementById('add-prescription');
@@ -465,6 +463,69 @@
             const orderNumber = document.querySelector('.order-number');
             const refillForm = document.getElementById('refill-form');
             
+            // Genesys helper functions
+            function updatePrescriptionCartAttribute() {
+                const cartData = {
+                    items: prescriptions.map(p => ({
+                        prescriptionNumber: p.number,
+                        price: p.price,
+                        addedAt: p.addedAt
+                    })),
+                    itemCount: prescriptions.length,
+                    subtotal: subtotal,
+                    discount: discount,
+                    total: total,
+                    lastUpdated: new Date().toISOString()
+                };
+                
+                // Convert cart data to JSON string
+                const cartJson = JSON.stringify(cartData);
+                
+                console.log('Updating prescription_cart attribute:', cartJson);
+                
+                try {
+                    // Use Genesys database plugin to set the custom attribute
+                    if (typeof window.Genesys === 'function') {
+                        window.Genesys('command', 'Database.set', {
+                            name: 'prescription_cart',
+                            value: cartJson
+                        }, function(result) {
+                            if (result && result.success) {
+                                console.log('✅ Successfully updated prescription_cart attribute');
+                            } else {
+                                console.error('❌ Failed to update prescription_cart attribute:', result);
+                            }
+                        });
+                    } else {
+                        console.warn('⚠️ Genesys is not available for database operations');
+                    }
+                } catch (error) {
+                    console.error('❌ Error updating prescription_cart attribute:', error);
+                }
+            }
+            
+            function enableIdleTracking() {
+                if (!idleTrackingEnabled) {
+                    try {
+                        if (typeof window.Genesys === 'function') {
+                            window.Genesys('command', 'Journey.trackIdleEvents', {
+                                idleEvents: [{
+                                    idleAfterSeconds: 60,
+                                    eventName: 'idle_1_minute'
+                                }]
+                            });
+                            
+                            idleTrackingEnabled = true;
+                            console.log('✅ Idle tracking enabled - will trigger after 60 seconds of inactivity');
+                        } else {
+                            console.warn('⚠️ Genesys is not available for journey tracking');
+                        }
+                    } catch (error) {
+                        console.error('❌ Error enabling idle tracking:', error);
+                    }
+                }
+            }
+            
             // Add prescription to cart
             addPrescriptionBtn.addEventListener('click', function() {
                 const rxNumber = prescriptionNumber.value.trim();
@@ -477,7 +538,8 @@
                     const prescription = {
                         id: Date.now(),
                         number: rxNumber,
-                        price: parseFloat(price)
+                        price: parseFloat(price),
+                        addedAt: new Date().toISOString()
                     };
                     
                     // Add to prescriptions array
@@ -502,10 +564,18 @@
                     // Update cart summary
                     updateCartSummary();
                     
+                    // Update Genesys prescription_cart attribute
+                    updatePrescriptionCartAttribute();
+                    
+                    // Enable idle tracking after first prescription is added
+                    enableIdleTracking();
+                    
                     // Add remove event listener
                     item.querySelector('.remove-btn').addEventListener('click', function() {
                         removePrescription(prescription.id);
                     });
+                    
+                    console.log('✅ Prescription added to cart:', prescription);
                 }
             });
             
@@ -530,6 +600,11 @@
                     }
                     
                     updateCartSummary();
+                    
+                    // Update Genesys attribute with coupon info
+                    if (prescriptions.length > 0) {
+                        updatePrescriptionCartAttribute();
+                    }
                 }
             });
             
@@ -546,6 +621,11 @@
                 
                 // Update cart summary
                 updateCartSummary();
+                
+                // Update Genesys attribute
+                updatePrescriptionCartAttribute();
+                
+                console.log('✅ Prescription removed from cart, ID:', id);
             }
             
             // Update cart summary
@@ -563,110 +643,50 @@
                 totalEl.textContent = `$${total.toFixed(2)}`;
             }
             
-/**
- * Alternative approach for tracking prescription cancellation events
- * that doesn't depend on the Genesys Journey plugin directly.
- */
-
-// Add to your cancel button event handler
-cancelBtn.addEventListener('click', function() {
-    if(confirm('Are you sure you want to cancel your order?')) {
-        console.log('Order cancellation confirmed');
-        
-        // Track the cancellation using our alternative approach
-        trackPrescriptionCancellation({
-            itemCount: prescriptions.length,
-            cartValue: subtotal.toFixed(2)
-        });
-        
-        // Reset the form immediately
-        resetForm();
-    }
-});
-
-/**
- * Function to track prescription cancellation events using multiple methods
- * to ensure at least one works.
- */
-function trackPrescriptionCancellation(data) {
-    console.log('Tracking prescription cancellation:', data);
-    
-    // Method 1: Try using our HealthPlus Genesys integration
-    try {
-        if (window.HealthPlus && window.HealthPlus.Genesys) {
-            window.HealthPlus.Genesys.trackEvent('prescription_refill_cancelled', {
-                actionType: 'cancel_refill',
-                pageSection: 'refill-form',
-                userIntent: 'abandonment',
-                itemCount: data.itemCount,
-                cartValue: data.cartValue,
-                timestamp: new Date().toISOString()
-            });
-        }
-    } catch (e) {
-        console.error('Method 1 (HealthPlus.Genesys) failed:', e);
-    }
-    
-    // Method 2: Try using direct Genesys object if available
-    try {
-        if (typeof window.Genesys === 'function') {
-            // The Genesys function can be called directly to queue commands
-            window.Genesys('command', 'Journey.record', {
-                eventName: 'prescription_refill_cancelled',
-                customAttributes: {
-                    actionType: 'cancel_refill',
-                    pageSection: 'refill-form',
-                    userIntent: 'abandonment',
-                    itemCount: data.itemCount,
-                    cartValue: data.cartValue,
-                    timestamp: new Date().toISOString()
+            // Cancel button event handler
+            cancelBtn.addEventListener('click', function() {
+                if(confirm('Are you sure you want to cancel your order?')) {
+                    console.log('Order cancellation confirmed');
+                    
+                    // Track the cancellation using Genesys
+                    trackPrescriptionCancellation({
+                        itemCount: prescriptions.length,
+                        cartValue: subtotal.toFixed(2)
+                    });
+                    
+                    // Reset the form immediately
+                    resetForm();
                 }
             });
-            console.log('Method 2 (direct Genesys call) completed');
-        }
-    } catch (e) {
-        console.error('Method 2 (direct Genesys call) failed:', e);
-    }
-    
-    // Method 3: Add a data attribute to the page for WebMessenger to pick up
-    // This assumes Predictive Engagement is enabled and looking for on-page signals
-    try {
-        // Create a hidden element with data attributes
-        const eventElement = document.createElement('div');
-        eventElement.style.display = 'none';
-        eventElement.setAttribute('data-predictive-event', 'prescription_refill_cancelled');
-        eventElement.setAttribute('data-predictive-cart-value', data.cartValue);
-        eventElement.setAttribute('data-predictive-item-count', data.itemCount);
-        
-        // Append to the page briefly, then remove
-        document.body.appendChild(eventElement);
-        setTimeout(() => {
-            document.body.removeChild(eventElement);
-        }, 1000);
-        
-        console.log('Method 3 (data attributes) completed');
-    } catch (e) {
-        console.error('Method 3 (data attributes) failed:', e);
-    }
-    
-    // Method 4: Use HTML5 custom event as a fallback
-    try {
-        const event = new CustomEvent('HealthPlusCancellation', {
-            detail: {
-                actionType: 'cancel_refill',
-                itemCount: data.itemCount,
-                cartValue: data.cartValue,
-                timestamp: new Date().toISOString()
-            },
-            bubbles: true
-        });
-        
-        document.dispatchEvent(event);
-        console.log('Method 4 (custom event) completed');
-    } catch (e) {
-        console.error('Method 4 (custom event) failed:', e);
-    }
-}
+            
+            // Function to track prescription cancellation events
+            function trackPrescriptionCancellation(data) {
+                console.log('Tracking prescription cancellation:', data);
+                
+                try {
+                    if (typeof window.Genesys === 'function') {
+                        // Clear the prescription_cart attribute since order was cancelled
+                        window.Genesys('command', 'Database.set', {
+                            name: 'prescription_cart',
+                            value: JSON.stringify({
+                                items: [],
+                                itemCount: 0,
+                                subtotal: 0,
+                                discount: 0,
+                                total: 0,
+                                status: 'cancelled',
+                                cancelledAt: new Date().toISOString(),
+                                previousCartValue: data.cartValue,
+                                previousItemCount: data.itemCount
+                            })
+                        });
+                        
+                        console.log('✅ Prescription cart cleared due to cancellation');
+                    }
+                } catch (error) {
+                    console.error('❌ Error tracking cancellation:', error);
+                }
+            }
             
             // Submit order
             document.getElementById('prescription-form').addEventListener('submit', function(e) {
@@ -679,6 +699,35 @@ function trackPrescriptionCancellation(data) {
                 
                 // Generate random order number
                 const orderNum = 'RX' + Math.floor(Math.random() * 10000000);
+                
+                // Update Genesys attribute with order completion
+                try {
+                    if (typeof window.Genesys === 'function') {
+                        const completedOrderData = {
+                            items: prescriptions.map(p => ({
+                                prescriptionNumber: p.number,
+                                price: p.price,
+                                addedAt: p.addedAt
+                            })),
+                            itemCount: prescriptions.length,
+                            subtotal: subtotal,
+                            discount: discount,
+                            total: total,
+                            status: 'completed',
+                            orderNumber: orderNum,
+                            completedAt: new Date().toISOString()
+                        };
+                        
+                        window.Genesys('command', 'Database.set', {
+                            name: 'prescription_cart',
+                            value: JSON.stringify(completedOrderData)
+                        });
+                        
+                        console.log('✅ Order completed and recorded in Genesys');
+                    }
+                } catch (error) {
+                    console.error('❌ Error recording order completion:', error);
+                }
                 
                 // Display success message
                 orderNumber.textContent = orderNum;
@@ -702,6 +751,7 @@ function trackPrescriptionCancellation(data) {
                 subtotal = 0;
                 discount = 0;
                 total = 0;
+                idleTrackingEnabled = false;
                 
                 // Update UI
                 updateCartSummary();
