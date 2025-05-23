@@ -478,17 +478,15 @@
                     lastUpdated: new Date().toISOString()
                 };
                 
-                // Convert cart data to JSON string
-                const cartJson = JSON.stringify(cartData);
-                
-                console.log('Updating prescription_cart attribute:', cartJson);
+                console.log('Updating prescription_cart attribute:', cartData);
                 
                 try {
                     // Use Genesys database plugin to set the custom attribute
+                    // Pass cartData as an object, not a JSON string
                     if (typeof window.Genesys === 'function') {
                         window.Genesys('command', 'Database.set', {
                             name: 'prescription_cart',
-                            value: cartJson
+                            value: cartData
                         }, function(result) {
                             if (result && result.success) {
                                 console.log('✅ Successfully updated prescription_cart attribute');
@@ -666,19 +664,21 @@
                 try {
                     if (typeof window.Genesys === 'function') {
                         // Clear the prescription_cart attribute since order was cancelled
+                        const cancellationData = {
+                            items: [],
+                            itemCount: 0,
+                            subtotal: 0,
+                            discount: 0,
+                            total: 0,
+                            status: 'cancelled',
+                            cancelledAt: new Date().toISOString(),
+                            previousCartValue: data.cartValue,
+                            previousItemCount: data.itemCount
+                        };
+                        
                         window.Genesys('command', 'Database.set', {
                             name: 'prescription_cart',
-                            value: JSON.stringify({
-                                items: [],
-                                itemCount: 0,
-                                subtotal: 0,
-                                discount: 0,
-                                total: 0,
-                                status: 'cancelled',
-                                cancelledAt: new Date().toISOString(),
-                                previousCartValue: data.cartValue,
-                                previousItemCount: data.itemCount
-                            })
+                            value: cancellationData
                         });
                         
                         console.log('✅ Prescription cart cleared due to cancellation');
@@ -720,7 +720,7 @@
                         
                         window.Genesys('command', 'Database.set', {
                             name: 'prescription_cart',
-                            value: JSON.stringify(completedOrderData)
+                            value: completedOrderData
                         });
                         
                         console.log('✅ Order completed and recorded in Genesys');
