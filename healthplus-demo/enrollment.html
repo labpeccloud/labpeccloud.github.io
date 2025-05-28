@@ -4,71 +4,422 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enrollment - HealthPlus Insurance</title>
-    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .enrollment-hero {
-            background-color: var(--bg-light);
-            padding: 40px 0;
-            text-align: center;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        .enrollment-hero h1 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
         }
-        
-        .enrollment-container {
-            display: grid;
-            grid-template-columns: 1fr 400px;
-            gap: 40px;
-            padding: 40px 0;
+
+        .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px;
         }
-        
-        .enrollment-form {
-            background-color: white;
-            padding: 30px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-sm);
+
+        /* Header */
+        header {
+            background: #4285f4;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        
-        .form-section {
-            margin-bottom: 30px;
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        .form-section h3 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--bg-light);
+
+        .logo h1 {
+            font-size: 1.8rem;
         }
-        
-        .form-row {
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .enrollment-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 15px;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+        }
+        
+        .form-card, .cart-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h2, h3 {
+            color: #4285f4;
+            margin-bottom: 20px;
         }
         
         .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-group.full-width {
-            grid-column: 1 / -1;
+            margin-bottom: 20px;
         }
         
         .form-group label {
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
-            color: var(--text-color);
+            color: #333;
         }
         
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-group input, .form-group select {
             width: 100%;
-            padding
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #4285f4;
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .selected-plan {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .plan-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4285f4;
+        }
+
+        .plan-type {
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        .plan-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+        
+        .cart-total {
+            border-top: 2px solid #ddd;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .cart-total h4 {
+            color: #333;
+            font-size: 18px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #4285f4;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #3367d6;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: #4285f4;
+            border: 2px solid #4285f4;
+        }
+
+        .btn-outline:hover {
+            background: #4285f4;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        .action-buttons {
+            margin-top: 20px;
+        }
+
+        .action-buttons .btn {
+            width: 100%;
+            margin: 5px 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .enrollment-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>HealthPlus</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="plans-individual.html">Plans</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="enrollment-container">
+        <!-- Customer Information Form -->
+        <div class="form-card">
+            <h2>Customer Information</h2>
+            <form id="enrollmentForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dob">Date of Birth *</label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender">
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Address *</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City *</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State *</label>
+                        <select id="state" name="state" required>
+                            <option value="">Select State</option>
+                            <option value="CA">California</option>
+                            <option value="NY">New York</option>
+                            <option value="TX">Texas</option>
+                            <option value="FL">Florida</option>
+                            <option value="VA">Virginia</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="zipCode">ZIP Code *</label>
+                    <input type="text" id="zipCode" name="zipCode" required>
+                </div>
+            </form>
+        </div>
+
+        <!-- Cart Summary -->
+        <div class="cart-card">
+            <h3>Plan Summary</h3>
+            <div class="selected-plan">
+                <div class="plan-name" id="planName">Loading...</div>
+                <div class="plan-type" id="planType">Individual Plan</div>
+                <div class="plan-price" id="planPrice">$0/month</div>
+            </div>
+            
+            <div class="cart-total">
+                <h4>Monthly Total: <span id="totalPrice">$0</span></h4>
+                <p style="font-size: 14px; color: #666;">Annual total: <span id="annualTotal">$0</span></p>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-danger" onclick="removePlan()">
+                    <i class="fas fa-trash"></i> Remove Plan
+                </button>
+                <button class="btn btn-primary" onclick="submitOrder()">
+                    <i class="fas fa-check"></i> Submit Order
+                </button>
+                <button class="btn btn-outline" onclick="cancelOrder()">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 HealthPlus Insurance. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Get plan details from URL parameters
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                plan: params.get('plan') || 'silver',
+                type: params.get('type') || 'individual',
+                price: params.get('price') || '299'
+            };
+        }
+
+        // Initialize page with selected plan
+        function initializePage() {
+            const params = getUrlParams();
+            const planName = params.plan.charAt(0).toUpperCase() + params.plan.slice(1);
+            const planType = params.type.charAt(0).toUpperCase() + params.type.slice(1) + ' Plan';
+            const monthlyPrice = parseInt(params.price);
+            const annualPrice = monthlyPrice * 12;
+
+            document.getElementById('planName').textContent = planName;
+            document.getElementById('planType').textContent = planType;
+            document.getElementById('planPrice').textContent = '$' + monthlyPrice + '/month';
+            document.getElementById('totalPrice').textContent = '$' + monthlyPrice;
+            document.getElementById('annualTotal').textContent = '$' + annualPrice.toLocaleString();
+        }
+
+        // Remove plan from cart
+        function removePlan() {
+            if (confirm('Are you sure you want to remove this plan from your cart?')) {
+                document.getElementById('planName').textContent = 'No Plan Selected';
+                document.getElementById('planPrice').textContent = '$0/month';
+                document.getElementById('totalPrice').textContent = '$0';
+                document.getElementById('annualTotal').textContent = '$0';
+            }
+        }
+
+        // Submit order
+        function submitOrder() {
+            const form = document.getElementById('enrollmentForm');
+            if (form.checkValidity()) {
+                const params = getUrlParams();
+                const customerData = {
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    plan: params.plan,
+                    type: params.type,
+                    price: params.price
+                };
+                
+                alert('Thank you for your enrollment! Your application has been submitted successfully. You will receive a confirmation email shortly.');
+                // In a real application, you would send this data to your server
+                console.log('Customer Data:', customerData);
+                
+                // Redirect to confirmation page
+                window.location.href = 'index.html';
+            } else {
+                alert('Please fill in all required fields.');
+                form.reportValidity();
+            }
+        }
+
+        // Cancel order
+        function cancelOrder() {
+            if (confirm('Are you sure you want to cancel? Your information will be lost.')) {
+                window.location.href = 'plans-individual.html';
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializePage);
+    </script>
+</body>
+</html>
