@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enrollment - HealthPlus Insurance</title>
+    <script type="text/javascript" charset="utf-8">
+  (function (g, e, n, es, ys) {
+    g['_genesysJs'] = e;
+    g[e] = g[e] || function () {
+      (g[e].q = g[e].q || []).push(arguments)
+    };
+    g[e].t = 1 * new Date();
+    g[e].c = es;
+    ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
+  })(window, 'Genesys', 'https://apps.usw2.pure.cloud/genesys-bootstrap/genesys.min.js', {
+    environment: 'prod-usw2',
+    deploymentId: '789f44bf-f15e-4ba0-a257-baec7186237e',
+      debug: true
+  });
+</script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -349,6 +364,9 @@
     </footer>
 
     <script>
+        let idleTimer;
+        let planAddedToCart = false;
+
         // Get plan details from URL parameters
         function getUrlParams() {
             const params = new URLSearchParams(window.location.search);
@@ -357,6 +375,80 @@
                 type: params.get('type') || 'individual',
                 price: params.get('price') || '299'
             };
+        }
+
+        // Get customer data from form
+        function getCustomerData() {
+            const params = getUrlParams();
+            return {
+                firstName: document.getElementById('firstName').value || '',
+                lastName: document.getElementById('lastName').value || '',
+                email: document.getElementById('email').value || '',
+                phone: document.getElementById('phone').value || '',
+                planName: params.plan,
+                planType: params.type,
+                planCost: parseFloat(params.price)
+            };
+        }
+
+        // Set Genesys Database attributes
+        function setGenesysAttributes(attributes) {
+            if (typeof Genesys !== 'undefined') {
+                Genesys("command", "Database.set", { 
+                    messaging: { 
+                        customAttributes: attributes 
+                    }
+                }, function(data) {
+                    console.log('Genesys attributes set successfully:', data);
+                }, function(error) {
+                    console.log('Failed to set Genesys attributes:', error);
+                });
+            }
+        }
+
+        // Record Genesys Journey event
+        function recordGenesysEvent(eventName, customAttributes) {
+            if (typeof Genesys !== 'undefined') {
+                Genesys("command", "Journey.record", { 
+                    eventName: eventName, 
+                    customAttributes: customAttributes, 
+                    traitsMapper: [] 
+                });
+                console.log('Genesys event recorded:', eventName, customAttributes);
+            } else {
+                console.log('Genesys not available, would record event:', eventName, customAttributes);
+            }
+        }
+
+        // Start idle timer
+        function startIdleTimer() {
+            clearTimeout(idleTimer);
+            if (planAddedToCart) {
+                idleTimer = setTimeout(() => {
+                    const customerData = getCustomerData();
+                    const attributes = {
+                        firstName: customerData.firstName,
+                        lastName: customerData.lastName,
+                        email: customerData.email,
+                        planName: customerData.planName,
+                        planType: customerData.planType,
+                        planCost: customerData.planCost
+                    };
+
+                    // Record idle event
+                    recordGenesysEvent('idle_1_min_plan_added_to_cart', attributes);
+                    
+                    // Set database attributes
+                    setGenesysAttributes(attributes);
+                    
+                    console.log('Customer idle for 1 minute with plan in cart');
+                }, 60000); // 1 minute
+            }
+        }
+
+        // Reset idle timer on user activity
+        function resetIdleTimer() {
+            startIdleTimer();
         }
 
         // Initialize page with selected plan
@@ -369,18 +461,58 @@
 
             document.getElementById('planName').textContent = planName;
             document.getElementById('planType').textContent = planType;
-            document.getElementById('planPrice').textContent = '$' + monthlyPrice + '/month';
-            document.getElementById('totalPrice').textContent = '$' + monthlyPrice;
-            document.getElementById('annualTotal').textContent = '$' + annualPrice.toLocaleString();
+            document.getElementById('planPrice').textContent = '
+</body>
+</html> + monthlyPrice + '/month';
+            document.getElementById('totalPrice').textContent = '
+</body>
+</html> + monthlyPrice;
+            document.getElementById('annualTotal').textContent = '
+</body>
+</html> + annualPrice.toLocaleString();
+
+            // Mark plan as added to cart
+            planAddedToCart = true;
+            
+            // Start idle timer
+            startIdleTimer();
+
+            // Add event listeners for user activity to reset idle timer
+            document.addEventListener('mousemove', resetIdleTimer);
+            document.addEventListener('keypress', resetIdleTimer);
+            document.addEventListener('scroll', resetIdleTimer);
+            document.addEventListener('click', resetIdleTimer);
         }
 
         // Remove plan from cart
         function removePlan() {
             if (confirm('Are you sure you want to remove this plan from your cart?')) {
+                const customerData = getCustomerData();
+                const attributes = {
+                    firstName: customerData.firstName,
+                    lastName: customerData.lastName,
+                    email: customerData.email,
+                    phone: customerData.phone,
+                    planName: customerData.planName,
+                    planType: customerData.planType,
+                    planCost: customerData.planCost
+                };
+
+                // Record remove plan event
+                recordGenesysEvent('removed_plan_from_cart', attributes);
+                
+                // Set database attributes
+                setGenesysAttributes(attributes);
+
+                // Update UI
                 document.getElementById('planName').textContent = 'No Plan Selected';
                 document.getElementById('planPrice').textContent = '$0/month';
                 document.getElementById('totalPrice').textContent = '$0';
                 document.getElementById('annualTotal').textContent = '$0';
+                
+                // Clear idle timer since plan removed
+                planAddedToCart = false;
+                clearTimeout(idleTimer);
             }
         }
 
@@ -388,19 +520,12 @@
         function submitOrder() {
             const form = document.getElementById('enrollmentForm');
             if (form.checkValidity()) {
-                const params = getUrlParams();
-                const customerData = {
-                    firstName: document.getElementById('firstName').value,
-                    lastName: document.getElementById('lastName').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    plan: params.plan,
-                    type: params.type,
-                    price: params.price
-                };
+                // Clear idle timer since order is being submitted
+                clearTimeout(idleTimer);
+                
+                const customerData = getCustomerData();
                 
                 alert('Thank you for your enrollment! Your application has been submitted successfully. You will receive a confirmation email shortly.');
-                // In a real application, you would send this data to your server
                 console.log('Customer Data:', customerData);
                 
                 // Redirect to confirmation page
@@ -414,6 +539,26 @@
         // Cancel order
         function cancelOrder() {
             if (confirm('Are you sure you want to cancel? Your information will be lost.')) {
+                const customerData = getCustomerData();
+                const attributes = {
+                    firstName: customerData.firstName,
+                    lastName: customerData.lastName,
+                    email: customerData.email,
+                    phone: customerData.phone,
+                    planName: customerData.planName,
+                    planType: customerData.planType,
+                    planCost: customerData.planCost
+                };
+
+                // Record cancel enrollment event
+                recordGenesysEvent('cancel_enrollment_order', attributes);
+                
+                // Set database attributes
+                setGenesysAttributes(attributes);
+
+                // Clear idle timer since order is cancelled
+                clearTimeout(idleTimer);
+                
                 window.location.href = 'plans-individual.html';
             }
         }
