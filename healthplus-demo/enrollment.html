@@ -564,7 +564,20 @@
         }
 
         // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', initializePage);
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing page...');
+            initializePage();
+        });
+
+        // Backup initialization in case DOMContentLoaded already fired
+        if (document.readyState === 'loading') {
+            // Document is still loading
+            document.addEventListener('DOMContentLoaded', initializePage);
+        } else {
+            // Document is already loaded
+            console.log('Document already loaded, initializing immediately...');
+            initializePage();
+        }
     </script>
 </body>
 </html>
