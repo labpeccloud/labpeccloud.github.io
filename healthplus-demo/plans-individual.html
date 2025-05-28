@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    </script>
     <script type="text/javascript" charset="utf-8">
   (function (g, e, n, es, ys) {
     g['_genesysJs'] = e;
@@ -97,6 +96,7 @@
             box-shadow: var(--shadow-md);
             color: var(--text-color);
             text-align: left;
+            position: relative;
         }
         
         .pricing-card h3 {
@@ -202,10 +202,57 @@
             margin-left: auto;
             margin-right: auto;
         }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #FBBC05;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .enroll-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .enroll-btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+
+        .enroll-btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .enroll-btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .enroll-btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
     </style>
 </head>
 <body>
-    <!-- Header with Dropdown Menus (Include your updated header here) -->
+    <!-- Header with Dropdown Menus -->
     <header>
         <div class="container">
           <div class="logo">
@@ -310,11 +357,11 @@
                         <li><i class="fas fa-check"></i> 30% Coinsurance</li>
                         <li><i class="fas fa-check"></i> $8,700 Out-of-pocket Maximum</li>
                     </ul>
-                    <a href="register.html" class="btn btn-outline" style="color: white; border-color: white; margin-top: 20px;">Enroll Now</a>
+                    <a href="enrollment.html?plan=bronze&type=individual&price=199" class="enroll-btn enroll-btn-outline">Enroll Now</a>
                 </div>
                 
-                <div class="pricing-card" style="transform: scale(1.05); border: 2px solid #FBBC05;">
-                    <span style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background-color: #FBBC05; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold;">Most Popular</span>
+                <div class="pricing-card">
+                    <span class="popular-badge">Most Popular</span>
                     <h3>Silver</h3>
                     <p>Enhanced coverage with lower out-of-pocket costs</p>
                     <div class="price">$299<span>/month</span></div>
@@ -325,7 +372,7 @@
                         <li><i class="fas fa-check"></i> 20% Coinsurance</li>
                         <li><i class="fas fa-check"></i> $6,500 Out-of-pocket Maximum</li>
                     </ul>
-                    <a href="register.html" class="btn btn-primary" style="margin-top: 20px;">Enroll Now</a>
+                    <a href="enrollment.html?plan=silver&type=individual&price=299" class="enroll-btn enroll-btn-primary">Enroll Now</a>
                 </div>
                 
                 <div class="pricing-card">
@@ -339,7 +386,7 @@
                         <li><i class="fas fa-check"></i> 10% Coinsurance</li>
                         <li><i class="fas fa-check"></i> $5,000 Out-of-pocket Maximum</li>
                     </ul>
-                    <a href="register.html" class="btn btn-outline" style="color: white; border-color: white; margin-top: 20px;">Enroll Now</a>
+                    <a href="enrollment.html?plan=gold&type=individual&price=399" class="enroll-btn enroll-btn-outline">Enroll Now</a>
                 </div>
             </div>
         </div>
@@ -529,7 +576,7 @@
         <div class="container">
             <h2>Ready to Get Started?</h2>
             <p>Take the first step toward comprehensive health coverage with our Individual Health Plan. Our enrollment specialists are ready to help you find the perfect coverage option for your needs and budget.</p>
-            <a href="register.html" class="btn btn-primary">Enroll Today</a>
+            <a href="enrollment.html?plan=silver&type=individual&price=299" class="btn btn-primary">Enroll Today</a>
             <a href="contact.html" class="btn btn-outline" style="margin-left: 15px;">Contact a Specialist</a>
         </div>
     </section>
@@ -603,6 +650,6 @@
                 });
             });
         });
-    
+    </script>
 </body>
 </html>
