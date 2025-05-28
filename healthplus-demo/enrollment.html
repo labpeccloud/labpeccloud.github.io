@@ -533,17 +533,44 @@
         }
 
         function submitOrder() {
+            console.log('Submit order button clicked');
+            
             var form = document.getElementById('enrollmentForm');
             if (form.checkValidity()) {
+                console.log('Form is valid, proceeding with order submission');
+                
                 clearTimeout(idleTimer);
                 
                 var customerData = getCustomerData();
+                console.log('Customer data for submit event:', customerData);
+                
+                var attributes = {
+                    firstName: customerData.firstName,
+                    lastName: customerData.lastName,
+                    email: customerData.email,
+                    phone: customerData.phone,
+                    planName: customerData.planName,
+                    planType: customerData.planType,
+                    planCost: customerData.planCost
+                };
+
+                console.log('Attributes for submit event:', attributes);
+
+                // Record submit order event
+                recordGenesysEvent('submit_enrollment_order', attributes);
+                
+                // Set database attributes
+                setGenesysAttributes(attributes);
                 
                 alert('Thank you for your enrollment! Your application has been submitted successfully. You will receive a confirmation email shortly.');
-                console.log('Customer Data:', customerData);
+                console.log('Order submitted successfully');
                 
-                window.location.href = 'index.html';
+                // Add a small delay to ensure Genesys events are sent before redirect
+                setTimeout(function() {
+                    window.location.href = 'index.html';
+                }, 1000);
             } else {
+                console.log('Form validation failed');
                 alert('Please fill in all required fields.');
                 form.reportValidity();
             }
