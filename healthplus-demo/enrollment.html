@@ -385,27 +385,39 @@
         }
 
         function setGenesysAttributes(attributes) {
+            console.log('Attempting to set Genesys attributes:', attributes);
             if (typeof Genesys !== 'undefined') {
-                Genesys("command", "Database.set", { 
-                    messaging: { 
-                        customAttributes: attributes 
-                    }
-                }, function(data) {
-                    console.log('Genesys attributes set successfully:', data);
-                }, function(error) {
-                    console.log('Failed to set Genesys attributes:', error);
-                });
+                try {
+                    Genesys("command", "Database.set", { 
+                        messaging: { 
+                            customAttributes: attributes 
+                        }
+                    }, function(data) {
+                        console.log('Genesys attributes set successfully:', data);
+                    }, function(error) {
+                        console.log('Failed to set Genesys attributes:', error);
+                    });
+                } catch (error) {
+                    console.error('Error setting Genesys attributes:', error);
+                }
+            } else {
+                console.log('Genesys not available, would set attributes:', attributes);
             }
         }
 
         function recordGenesysEvent(eventName, customAttributes) {
+            console.log('Attempting to record Genesys event:', eventName, customAttributes);
             if (typeof Genesys !== 'undefined') {
-                Genesys("command", "Journey.record", { 
-                    eventName: eventName, 
-                    customAttributes: customAttributes, 
-                    traitsMapper: [] 
-                });
-                console.log('Genesys event recorded:', eventName, customAttributes);
+                try {
+                    Genesys("command", "Journey.record", { 
+                        eventName: eventName, 
+                        customAttributes: customAttributes, 
+                        traitsMapper: [] 
+                    });
+                    console.log('Genesys event recorded successfully:', eventName);
+                } catch (error) {
+                    console.error('Error recording Genesys event:', error);
+                }
             } else {
                 console.log('Genesys not available, would record event:', eventName, customAttributes);
             }
@@ -481,8 +493,14 @@
         }
 
         function removePlan() {
+            console.log('Remove plan button clicked');
+            
             if (confirm('Are you sure you want to remove this plan from your cart?')) {
+                console.log('User confirmed plan removal');
+                
                 var customerData = getCustomerData();
+                console.log('Customer data for remove event:', customerData);
+                
                 var attributes = {
                     firstName: customerData.firstName,
                     lastName: customerData.lastName,
@@ -493,9 +511,15 @@
                     planCost: customerData.planCost
                 };
 
+                console.log('Attributes for remove event:', attributes);
+
+                // Record remove event
                 recordGenesysEvent('removed_plan_from_cart', attributes);
+                
+                // Set database attributes
                 setGenesysAttributes(attributes);
 
+                // Update UI
                 document.getElementById('planName').textContent = 'No Plan Selected';
                 document.getElementById('planPrice').textContent = '$0/month';
                 document.getElementById('totalPrice').textContent = '$0';
@@ -503,6 +527,8 @@
                 
                 planAddedToCart = false;
                 clearTimeout(idleTimer);
+            } else {
+                console.log('User cancelled the removal');
             }
         }
 
@@ -524,8 +550,14 @@
         }
 
         function cancelOrder() {
+            console.log('Cancel button clicked');
+            
             if (confirm('Are you sure you want to cancel? Your information will be lost.')) {
+                console.log('User confirmed cancellation');
+                
                 var customerData = getCustomerData();
+                console.log('Customer data for cancel event:', customerData);
+                
                 var attributes = {
                     firstName: customerData.firstName,
                     lastName: customerData.lastName,
@@ -536,12 +568,22 @@
                     planCost: customerData.planCost
                 };
 
+                console.log('Attributes for cancel event:', attributes);
+
+                // Record cancel event
                 recordGenesysEvent('cancel_enrollment_order', attributes);
+                
+                // Set database attributes
                 setGenesysAttributes(attributes);
 
                 clearTimeout(idleTimer);
                 
-                window.location.href = 'plans-individual.html';
+                // Add a small delay to ensure Genesys events are sent before redirect
+                setTimeout(function() {
+                    window.location.href = 'plans-individual.html';
+                }, 1000);
+            } else {
+                console.log('User cancelled the cancellation');
             }
         }
 
