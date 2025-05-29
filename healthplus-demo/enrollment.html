@@ -579,39 +579,30 @@
         function cancelOrder() {
             console.log('Cancel button clicked');
             
-            if (confirm('Are you sure you want to cancel? Your information will be lost.')) {
-                console.log('User confirmed cancellation');
-                
-                var customerData = getCustomerData();
-                console.log('Customer data for cancel event:', customerData);
-                
-                var attributes = {
-                    firstName: customerData.firstName,
-                    lastName: customerData.lastName,
-                    email: customerData.email,
-                    phone: customerData.phone,
-                    planName: customerData.planName,
-                    planType: customerData.planType,
-                    planCost: customerData.planCost
-                };
+            var customerData = getCustomerData();
+            console.log('Customer data for cancel event:', customerData);
+            
+            var attributes = {
+                firstName: customerData.firstName,
+                lastName: customerData.lastName,
+                email: customerData.email,
+                phone: customerData.phone,
+                planName: customerData.planName,
+                planType: customerData.planType,
+                planCost: customerData.planCost
+            };
 
-                console.log('Attributes for cancel event:', attributes);
+            console.log('Attributes for cancel event:', attributes);
 
-                // Record cancel event
-                recordGenesysEvent('cancel_enrollment_order', attributes);
-                
-                // Set database attributes
-                setGenesysAttributes(attributes);
+            // Record cancel event
+            recordGenesysEvent('cancel_enrollment_order', attributes);
+            
+            // Set database attributes
+            setGenesysAttributes(attributes);
 
-                clearTimeout(idleTimer);
-                
-                // Add a small delay to ensure Genesys events are sent before redirect
-                setTimeout(function() {
-                    window.location.href = 'plans-individual.html';
-                }, 1000);
-            } else {
-                console.log('User cancelled the cancellation');
-            }
+            clearTimeout(idleTimer);
+            
+            console.log('Cancel event recorded, staying on same page');
         }
 
         if (document.readyState === 'loading') {
