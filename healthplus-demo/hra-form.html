@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Risk Assessment Form - HealthPlus Insurance</title>
+    <script type="text/javascript" charset="utf-8">
+  (function (g, e, n, es, ys) {
+    g['_genesysJs'] = e;
+    g[e] = g[e] || function () {
+      (g[e].q = g[e].q || []).push(arguments)
+    };
+    g[e].t = 1 * new Date();
+    g[e].c = es;
+    ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
+  })(window, 'Genesys', 'https://apps.usw2.pure.cloud/genesys-bootstrap/genesys.min.js', {
+    environment: 'prod-usw2',
+    deploymentId: '789f44bf-f15e-4ba0-a257-baec7186237e',
+      debug: true
+  });
+</script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: #4285f4;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .hra-hero {
+            background-color: #f8f9fa;
+            padding: 40px 0;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .hra-hero h1 {
+            color: #4285f4;
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+        }
+
+        .hra-hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hra-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hra-form {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .question-block {
+            margin-bottom: 30px;
+            padding: 25px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .question-block:hover {
+            border-color: #4285f4;
+            box-shadow: 0 2px 8px rgba(66, 133, 244, 0.1);
+        }
+
+        .question-block.active {
+            border-color: #4285f4;
+            background-color: #f8f9ff;
+        }
+
+        .question-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .question-number {
+            background: #4285f4;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 15px;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .question-text {
+            flex: 1;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .mandatory {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .question-options {
+            margin-top: 15px;
+        }
+
+        .option-group {
+            margin-bottom: 10px;
+        }
+
+        .option-group input[type="radio"],
+        .option-group input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .option-group label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .option-group label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .text-input, .email-input, .phone-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .text-input:focus, .email-input:focus, .phone-input:focus {
+            outline: none;
+            border-color: #4285f4;
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+        }
+
+        .submit-container {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+
+        .btn-primary {
+            background: #4285f4;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #3367d6;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #4285f4;
+            border: 2px solid #4285f4;
+        }
+
+        .btn-outline:hover {
+            background: #4285f4;
+            color: white;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #4285f4;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .message {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .message-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .hra-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hra-form {
+                padding: 20px;
+            }
+            
+            .question-block {
+                padding: 15px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>HealthPlus</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="plans-individual.html">Plans</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hra-hero">
+        <div class="container">
+            <h1>Health Risk Assessment</h1>
+            <p>Complete this short survey to help us better understand your health needs and provide personalized recommendations for your wellness journey.</p>
+        </div>
+    </section>
+
+    <div class="hra-container">
+        <div class="hra-form">
+            <div id="messageContainer"></div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <form id="hraForm">
+                <!-- Question 1 -->
+                <div class="question-block" data-question="1">
+                    <div class="question-header">
+                        <div class="question-number">1</div>
+                        <div class="question-text">
+                            Do you consent to proceed with this short survey?
+                            <span class="mandatory">* Required</span>
+                        </div>
+                    </div>
+                    <div class="question-options">
+                        <div class="option-group">
+                            <label><input type="radio" name="q1" value="Yes" required> Yes</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q1" value="No" required> No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-block" data-question="2">
+                    <div class="question-header">
+                        <div class="question-number">2</div>
+                        <div class="question-text">Do you have an email address you prefer we use to contact you?</div>
+                    </div>
+                    <div class="question-options">
+                        <div class="option-group">
+                            <label><input type="radio" name="q2" value="Yes"> Yes</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q2" value="No"> No, I am not currently able to access email from a phone or computer in my home.</label>
+                        </div>
+                        <input type="email" class="email-input" name="email" placeholder="Enter your email address (optional)">
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-block" data-question="3">
+                    <div class="question-header">
+                        <div class="question-number">3</div>
+                        <div class="question-text">What is your preferred language? Language assistance services, free of charge, are available to you: 1-877-320-1235 (TTY: 711)</div>
+                    </div>
+                    <div class="question-options">
+                        <div class="option-group">
+                            <label><input type="radio" name="q3" value="English"> English</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q3" value="Spanish"> Spanish</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q3" value="Korean"> Korean</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q3" value="Mandarin"> Mandarin</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q3" value="Other"> Other</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-block" data-question="4">
+                    <div class="question-header">
+                        <div class="question-number">4</div>
+                        <div class="question-text">
+                            What health conditions do you currently have or are managing? Please mark each condition that applies to you:
+                            <span class="mandatory">* Required</span>
+                        </div>
+                    </div>
+                    <div class="question-options">
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="Diabetes"> Diabetes</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="Asthma"> Asthma</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="COPD"> COPD</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="Emphysema/Other Lung Condition"> Emphysema/Other Lung Condition</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="Cardiovascular Disease"> Cardiovascular Disease</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="Previous Heart Attack or Acute Myocardial Infarction (AMI)"> Previous Heart Attack or Acute Myocardial Infarction (AMI)</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="Heart Failure"> Heart Failure</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="High Blood Pressure"> High Blood Pressure</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="High Cholesterol"> High Cholesterol</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="Stroke"> Stroke</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="Cancer"> Cancer</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="HIV/AIDS"> HIV/AIDS</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="Kidney Disease/Kidney Failure on Dialysis"> Kidney Disease/Kidney Failure on Dialysis</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="Substance Abuse"> Substance Abuse</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="Atrial Fibrillation"> Atrial Fibrillation</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="Liver Disease"> Liver Disease</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="Obesity"> Obesity</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="Any other chronic health condition not listed"> Any other chronic health condition not listed</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q4[]" value="None / Prefer not to answer"> None / Prefer not to answer</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-block" data-question="5">
+                    <div class="question-header">
+                        <div class="question-number">5</div>
+                        <div class="question-text">
+                            On a scale of 0 - 10, what is your current day-to-day pain level? (0 = no pain, 10 = the most pain you've ever felt)
+                            <span class="mandatory">* Required</span>
+                        </div>
+                    </div>
+                    <div class="question-options">
+                        <div class="option-group">
+                            <label><input type="radio" name="q5" value="0" required> 0</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q5" value="1" required> 1</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q5" value="2" required> 2</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q5" value="3" required> 3</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q5" value="4" required> 4</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q5" value="5" required> 5</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q5" value="6" required> 6</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q5" value="7" required> 7</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q5" value="8" required> 8</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q5" value="9" required> 9</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="radio" name="q5" value="10" required> 10</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Continue with remaining questions... I'll add a few more key ones -->
+                <!-- Question 6 -->
+                <div class="question-block" data-question="6">
+                    <div class="question-header">
+                        <div class="question-number">6</div>
+                        <div class="question-text">
+                            In the past month, did you need help with any of the following. Choose all that apply.
+                            <span class="mandatory">* Required</span>
+                        </div>
+                    </div>
+                    <div class="question-options">
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q6[]" value="Getting around your home (walking)"> Getting around your home (walking)</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q6[]" value="Feeding yourself"> Feeding yourself</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q6[]" value="Getting in or out of bed or a chair"> Getting in or out of bed or a chair</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q6[]" value="Caring for yourself, including bathing"> Caring for yourself, including bathing</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q6[]" value="Dressing yourself"> Dressing yourself</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q6[]" value="Using the toilet"> Using the toilet</label>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" name="q6[]" value="No issues at this time"> No issues at this time</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 20 (Phone Number) -->
+                <div class="question-block" data-question="20">
+                    <div class="question-header">
+                        <div class="question-number">20</div>
+                        <div class="question-text">What phone number do you prefer we use to contact you?</div>
+                    </div>
+                    <div class="question-options">
+                        <input type="tel" class="phone-input" name="phone" placeholder="Enter your preferred phone number (optional)">
+                    </div>
+                </div>
+
+                <div class="submit-container">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i> Submit HRA Form
+                    </button>
+                    <button type="button" class="btn btn-outline" onclick="clearForm()">
+                        <i class="fas fa-undo"></i> Clear Form
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 HealthPlus Insurance. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        var currentActiveQuestion = null;
+        var idleTimer = null;
+        var questionStartTime = null;
+
+        function showMessage(text, type) {
+            var messageContainer = document.getElementById('messageContainer');
+            messageContainer.innerHTML = '<div class="message message-' + type + '">' + text + '</div>';
+            
+            setTimeout(function() {
+                messageContainer.innerHTML = '';
+            }, 5000);
+        }
+
+        function recordGenesysEvent(eventName, customAttributes) {
+            console.log('Recording Genesys event:', eventName, customAttributes);
+            if (typeof Genesys !== 'undefined') {
+                try {
+                    Genesys("command", "Journey.record", { 
+                        eventName: eventName, 
+                        customAttributes: customAttributes, 
+                        traitsMapper: [] 
+                    });
+                    console.log('Genesys event recorded successfully:', eventName);
+                } catch (error) {
+                    console.error('Error recording Genesys event:', error);
+                }
+            } else {
+                console.log('Genesys not available, would record event:', eventName, customAttributes);
+            }
+        }
+
+        function setGenesysAttributes(attributes) {
+            console.log('Setting Genesys attributes:', attributes);
+            if (typeof Genesys !== 'undefined') {
+                try {
+                    Genesys("command", "Database.set", { 
+                        messaging: { 
+                            customAttributes: attributes 
+                        }
+                    }, function(data) {
+                        console.log('Genesys attributes set successfully:', data);
+                    }, function(error) {
+                        console.log('Failed to set Genesys attributes:', error);
+                    });
+                } catch (error) {
+                    console.error('Error setting Genesys attributes:', error);
+                }
+            }
+        }
+
+        function startQuestionTimer(questionNumber) {
+            clearTimeout(idleTimer);
+            currentActiveQuestion = questionNumber;
+            questionStartTime = Date.now();
+            
+            console.log('Started timer for question', questionNumber);
+            
+            idleTimer = setTimeout(function() {
+                var attributes = {
+                    questionNumber: questionNumber,
+                    timeOnQuestion: 60, // 1 minute
+                    timestamp: new Date().toISOString(),
+                    formSection: 'HRA'
+                };
+                
+                recordGenesysEvent('hra_question_idle_1_min', attributes);
+                setGenesysAttributes(attributes);
+                
+                console.log('User idle on question', questionNumber, 'for 1 minute');
+            }, 60000); // 1 minute
+        }
+
+        function handleQuestionFocus(event) {
+            var questionBlock = event.target.closest('.question-block');
+            if (questionBlock) {
+                // Remove active class from all question blocks
+                var allBlocks = document.querySelectorAll('.question-block');
+                allBlocks.forEach(function(block) {
+                    block.classList.remove('active');
+                });
+                
+                // Add active class to current question
+                questionBlock.classList.add('active');
+                
+                var questionNumber = questionBlock.getAttribute('data-question');
+                startQuestionTimer(questionNumber);
+            }
+        }
+
+        function updateProgress() {
+            var form = document.getElementById('hraForm');
+            var inputs = form.querySelectorAll('input[required], input[type="radio"], input[type="checkbox"]');
+            var answered = 0;
+            var total = 0;
+            
+            // Count required questions
+            var requiredQuestions = form.querySelectorAll('input[required]');
+            var answeredRequired = 0;
+            
+            requiredQuestions.forEach(function(input) {
+                var name = input.name;
+                if (form.querySelector('input[name="' + name + '"]:checked')) {
+                    answeredRequired++;
+                }
+            });
+            
+            // Count all questions (approximate)
+            var allQuestions = 20; // Total questions
+            var allAnswered = 0;
+            
+            for (var i = 1; i <= allQuestions; i++) {
+                var questionInputs = form.querySelectorAll('input[name="q' + i + '"], input[name="q' + i + '[]"]');
+                if (questionInputs.length > 0) {
+                    var hasAnswer = false;
+                    questionInputs.forEach(function(input) {
+                        if (input.checked || (input.type === 'email' && input.value) || (input.type === 'tel' && input.value)) {
+                            hasAnswer = true;
+                        }
+                    });
+                    if (hasAnswer) allAnswered++;
+                }
+            }
+            
+            var progress = (allAnswered / allQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all your answers? This action cannot be undone.')) {
+                document.getElementById('hraForm').reset();
+                updateProgress();
+                
+                // Remove active classes
+                var allBlocks = document.querySelectorAll('.question-block');
+                allBlocks.forEach(function(block) {
+                    block.classList.remove('active');
+                });
+                
+                clearTimeout(idleTimer);
+                currentActiveQuestion = null;
+                
+                showMessage('Form has been cleared.', 'warning');
+            }
+        }
+
+        function submitHRAForm(event) {
+            event.preventDefault();
+            
+            clearTimeout(idleTimer);
+            
+            var form = document.getElementById('hraForm');
+            var formData = new FormData(form);
+            
+            // Collect all form data
+            var responses = {};
+            var healthConditions = [];
+            var dailyHelpNeeds = [];
+            
+            for (var pair of formData.entries()) {
+                if (pair[0].includes('q4[]')) {
+                    healthConditions.push(pair[1]);
+                } else if (pair[0].includes('q6[]')) {
+                    dailyHelpNeeds.push(pair[1]);
+                } else {
+                    responses[pair[0]] = pair[1];
+                }
+            }
+            
+            var attributes = {
+                consent: responses.q1 || '',
+                hasEmail: responses.q2 || '',
+                email: responses.email || '',
+                preferredLanguage: responses.q3 || '',
+                healthConditions: healthConditions.join(', '),
+                painLevel: responses.q5 || '',
+                dailyHelpNeeds: dailyHelpNeeds.join(', '),
+                phone: responses.phone || '',
+                completionTime: new Date().toISOString(),
+                formType: 'HRA'
+            };
+            
+            // Record HRA completion event
+            recordGenesysEvent('hra_form_completed', attributes);
+            setGenesysAttributes(attributes);
+            
+            showMessage('Thank you! Your Health Risk Assessment has been submitted successfully. Our team will review your responses and contact you with personalized recommendations.', 'success');
+            
+            // Scroll to top to show message
+            window.scrollTo(0, 0);
+            
+            console.log('HRA Form submitted:', attributes);
+        }
+
+        // Initialize the form
+        document.addEventListener('DOMContentLoaded', function() {
+            var form = document.getElementById('hraForm');
+            
+            // Add event listeners for all inputs
+            var inputs = form.querySelectorAll('input');
+            inputs.forEach(function(input) {
+                input.addEventListener('focus', handleQuestionFocus);
+                input.addEventListener('change', updateProgress);
+            });
+            
+            // Form submission
+            form.addEventListener('submit', submitHRAForm);
+            
+            // Initial progress update
+            updateProgress();
+            
+            console.log('HRA Form initialized');
+        });
+    </script>
+</body>
+</html>)
