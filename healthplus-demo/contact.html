@@ -106,6 +106,7 @@
         // Initialize Genesys form tracking
         function initGenesysTracking() {
             try {
+                console.log("before_journey_formstrack")
                 Genesys("command", "Journey.formsTrack", {
                     selector: "#contactForm",
                     formName: "Contact Form",
@@ -121,6 +122,7 @@
                         { fieldName: "message", traitName: "userMessage" }
                     ]
                 });
+                console.log("after_journey_formstrack")
             } catch (error) {
                 console.error("Genesys tracking initialization error:", error);
             }
